@@ -10,8 +10,8 @@
     <meta property="og:title" content="Eclipse Design – L'image qui frappe.">
     <meta property="og:description" content="Branding visuel rapide pour entrepreneurs, artistes et commerçants. Logo, flyer, identité visuelle livrés en 72h.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://eclipsedesign.netlify.app">
-    <meta property="og:image" content="https://eclipsedesign.netlify.app/og-image.png">
+    <meta property="og:url" content="https://vens942-png.github.io/Eclipse-design3/">
+    <meta property="og:image" content="https://vens942-png.github.io/Eclipse-design3/og-image.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='16' fill='%23080808'/><circle cx='16' cy='16' r='14' fill='none' stroke='%23a3ff3b' stroke-width='2'/><circle cx='16' cy='16' r='6' fill='%23a3ff3b'/></svg>">
@@ -168,6 +168,58 @@
         }
         .highlight-card .icon { background: rgba(0,0,0,0.2); }
         .highlight-card p { color: #111; }
+
+        /* Avis */
+        .avis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 40px auto 0;
+        }
+        .avis-card {
+            background: #0d0d0d;
+            border: 1px solid #1a1a1a;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .avis-card:hover {
+            transform: translateY(-5px);
+            border-color: #FFD700;
+        }
+        .avis-stars {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        .avis-text {
+            color: #ccc;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        .avis-author {
+            color: #a3ff3b;
+            font-weight: 700;
+        }
+        .btn-avis {
+            display: inline-block;
+            background: transparent;
+            color: #a3ff3b;
+            border: 2px solid #a3ff3b;
+            padding: 12px 30px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        .btn-avis:hover {
+            background: #a3ff3b;
+            color: #000;
+        }
+
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -191,6 +243,54 @@
             margin-bottom: 20px;
         }
         .about-text strong { color: #fff; }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 40px;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: #0d0d0d;
+            border: 1px solid #1a1a1a;
+            text-decoration: none;
+            color: #f5f5f5;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .contact-item:hover {
+            border-color: #a3ff3b;
+            transform: translateY(-3px);
+        }
+        .contact-item .contact-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(163,255,59,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .contact-item .contact-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #777;
+        }
+        .contact-item .contact-value {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #fff;
+        }
         .contact-form input,
         .contact-form textarea {
             width: 100%;
@@ -230,7 +330,33 @@
             text-align: center;
             color: #a3ff3b;
             font-weight: 700;
+            margin-top: 20px;
         }
+
+        /* Bouton WhatsApp flottant */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #25D366;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 200;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37,211,102,0.3);
+        }
+
         footer {
             border-top: 1px solid #222;
             padding: 40px;
@@ -246,6 +372,8 @@
             section { padding: 50px 20px; }
             .about-grid { grid-template-columns: 1fr; }
             .about-img { max-width: 100%; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .whatsapp-float { width: 50px; height: 50px; font-size: 1.5rem; bottom: 15px; right: 15px; }
         }
     </style>
 </head>
@@ -255,6 +383,7 @@
     <div class="logo">Eclipse <span>Design</span></div>
     <nav>
         <a href="#services">Services</a>
+        <a href="#avis">Avis</a>
         <a href="#about">À propos</a>
         <a href="#contact" class="btn-devis">Devis</a>
     </nav>
@@ -298,6 +427,34 @@
     </div>
 </section>
 
+<section id="avis" style="background:#0a0a0a; border-top:1px solid #1a1a1a; border-bottom:1px solid #1a1a1a;">
+    <h2 style="text-align:center;">Ce que <span>nos clients</span> disent</h2>
+    <p style="text-align:center; color:#777; margin-bottom:50px;">Votre satisfaction est notre meilleure récompense.</p>
+
+    <div class="avis-grid">
+        <div class="avis-card">
+            <div class="avis-stars">★★★★★</div>
+            <p class="avis-text">"Eclipse Design a créé mon logo en un temps record. Professionnel, créatif, à l'écoute. Je recommande à 100%."</p>
+            <span class="avis-author">— Jean R., Entrepreneur</span>
+        </div>
+        <div class="avis-card">
+            <div class="avis-stars">★★★★★</div>
+            <p class="avis-text">"Mon flyer a fait sensation. Livraison rapide, design percutant. C'est exactement ce que je voulais."</p>
+            <span class="avis-author">— Marie L., Commerçante</span>
+        </div>
+        <div class="avis-card">
+            <div class="avis-stars">★★★★★</div>
+            <p class="avis-text">"Une identité visuelle complète qui a transformé mon entreprise. Du grand art. Merci Eclipse Design."</p>
+            <span class="avis-author">— Pierre K., Start-up</span>
+        </div>
+    </div>
+
+    <div style="text-align:center; margin-top:40px;">
+        <p style="color:#999; margin-bottom:15px;">Vous avez travaillé avec nous ?</p>
+        <a href="https://wa.me/50947873144?text=Bonjour%20Eclipse%20Design,%20je%20veux%20laisser%20un%20avis%20!" target="_blank" class="btn-avis">Laisser un avis ⭐</a>
+    </div>
+</section>
+
 <section id="about">
     <h2>Derrière <span>Eclipse Design</span></h2>
     <div class="about-grid">
@@ -323,19 +480,39 @@
 
 <section id="contact">
     <h2>Prêt à faire naître votre <span>image</span> ?</h2>
-    <p style="color:#999; margin-bottom:40px; max-width:500px;">Une question ? Un projet ? Remplissez le formulaire. Je vous réponds sous 24h maximum.</p>
+    <p style="color:#999; margin-bottom:30px; max-width:500px;">Contactez-moi directement ou remplissez le formulaire. Je vous réponds sous 24h.</p>
 
-    <form class="contact-form" action="https://formspree.io/f/mbdbpkoy" method="POST">
-        <input type="text" name="name" placeholder="Votre nom" required>
-        <input type="email" name="email" placeholder="votre@email.com" required>
-        <textarea name="message" placeholder="Parlez-moi de votre marque..." required></textarea>
-        <button type="submit">Envoyer le message →</button>
-    </form>
+    <div class="contact-grid">
+        <div class="contact-info">
+            <a href="https://wa.me/50947873144" target="_blank" class="contact-item">
+                <div class="contact-icon">💬</div>
+                <div>
+                    <div class="contact-label">WhatsApp</div>
+                    <div class="contact-value">+509 4787 3144</div>
+                </div>
+            </a>
+            <a href="mailto:eclipse-design@proton.me" class="contact-item">
+                <div class="contact-icon">✉️</div>
+                <div>
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">eclipse-design@proton.me</div>
+                </div>
+            </a>
+        </div>
+        <form class="contact-form" action="https://formspree.io/f/mbdbpkoy" method="POST">
+            <input type="text" name="name" placeholder="Votre nom" required>
+            <input type="email" name="email" placeholder="votre@email.com" required>
+            <textarea name="message" placeholder="Parlez-moi de votre marque..." required></textarea>
+            <button type="submit">Envoyer le message →</button>
+        </form>
+    </div>
 
     <div class="success-message" id="success-message">
         ✅ Message envoyé avec succès. Je vous réponds sous 24h.
     </div>
 </section>
+
+<a href="https://wa.me/50947873144" target="_blank" class="whatsapp-float" title="Discutons sur WhatsApp">💬</a>
 
 <footer>
     © Eclipse Design – L'image qui frappe. Tous droits réservés.
