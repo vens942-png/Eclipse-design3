@@ -155,6 +155,43 @@
         }
         .modele-label span { color: #a3ff3b; }
 
+        /* Galerie */
+        .galerie-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; margin-top: 30px;
+        }
+        .galerie-card {
+            background: rgba(255,255,255,0.02); backdrop-filter: blur(10px);
+            border: 1px solid rgba(163,255,59,0.15); border-radius: 12px;
+            overflow: hidden; transition: transform 0.4s, box-shadow 0.4s;
+        }
+        .galerie-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(163,255,59,0.15);
+        }
+        .galerie-card img {
+            width: 100%; height: 280px; object-fit: cover; display: block;
+        }
+        .galerie-card .card-body { padding: 20px; }
+        .galerie-card .card-artist {
+            color: #a3ff3b; font-size: 0.75rem; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 5px;
+        }
+        .galerie-card .card-title {
+            color: #fff; font-weight: 700; font-size: 1.2rem; margin-bottom: 5px;
+        }
+        .galerie-card .card-subtitle {
+            color: #999; font-size: 0.9rem; font-style: italic; margin-bottom: 15px;
+        }
+        .share-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+        .share-btn {
+            padding: 6px 12px; border-radius: 20px; text-decoration: none;
+            font-size: 0.7rem; font-weight: 600; color: #fff;
+        }
+        .share-btn.wa { background: #25D366; }
+        .share-btn.fb { background: #1877F2; }
+        .share-btn.tw { background: #1DA1F2; }
+
         /* Chat */
         .chat-section {
             background: #0a0a0a; border-top: 1px solid #1a1a1a;
@@ -292,6 +329,7 @@
     <nav>
         <a href="#services">Services</a>
         <a href="#modeles">Modèles</a>
+        <a href="#galerie">Galerie</a>
         <a href="#avis">Avis</a>
         <a href="#about">À propos</a>
         <a href="#chat-section">Chat</a>
@@ -361,6 +399,112 @@
         <div class="modele-card">
             <img src="https://i.postimg.cc/xCrFXPf3/Haute-Tension-Vol-2-20250703-091711-0000.png" alt="Modèle Party" loading="lazy">
             <div class="modele-label">Modèle <span>Haute Tension Party</span></div>
+        </div>
+    </div>
+</section>
+
+<!-- Section Galerie d'Art Futuriste -->
+<section id="galerie" style="background:#060606; padding:80px 40px; position:relative; z-index:1; border-top:1px solid #111; border-bottom:1px solid #111;">
+    
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0.03; pointer-events:none; background-image:radial-gradient(#a3ff3b 1px, transparent 1px); background-size:30px 30px;"></div>
+
+    <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto;">
+        
+        <h2 style="font-family:monospace; font-size:clamp(2rem,5vw,4rem); font-weight:900; text-transform:uppercase; text-align:center; margin-bottom:10px; color:#a3ff3b; text-shadow:0 0 10px rgba(163,255,59,0.3);">
+            // GALERIE D'ART
+        </h2>
+        <p style="text-align:center; color:#777; font-size:1rem; margin-bottom:15px; font-style:italic;">
+            "Deux regards, une signature."
+        </p>
+
+        <div style="margin:30px 0; border-radius:8px; overflow:hidden; border:1px solid rgba(163,255,59,0.2); box-shadow:0 0 30px rgba(163,255,59,0.05);">
+            <img src="https://i.postimg.cc/d0yCMyfp/JB_EXPO.jpg" alt="JB EXPO" style="width:100%; height:auto; display:block;">
+        </div>
+
+        <p style="text-align:center; color:#999; font-size:1rem; max-width:700px; margin:25px auto 40px; line-height:1.8;">
+            Jennika & Kervens Jean Baptiste — L'art de transformer l'invisible en visible. Chaque toile est une brèche ouverte sur un monde intérieur.<br>
+            <strong style="color:#a3ff3b;">Pièces uniques • Sur commande</strong>
+        </p>
+
+        <!-- Lien article Le Nouvelliste -->
+        <div style="text-align:center; margin-bottom:40px;">
+            <a href="https://lenouvelliste.com/article/252288/lunivers-pictural-de-jennika-jean-baptiste" target="_blank" style="display:inline-block; background:rgba(163,255,59,0.05); color:#a3ff3b; border:1px solid rgba(163,255,59,0.3); padding:10px 25px; border-radius:25px; text-decoration:none; font-size:0.9rem; font-weight:600; transition:all 0.3s;" onmouseover="this.style.background='rgba(163,255,59,0.15)';" onmouseout="this.style.background='rgba(163,255,59,0.05)';">
+                📰 L'univers pictural de Jennika Jean-Baptiste — Le Nouvelliste
+            </a>
+        </div>
+
+        <div class="galerie-grid">
+
+            <!-- Œuvre 1 - Citadelle - Kervens -->
+            <div class="galerie-card">
+                <img src="https://i.postimg.cc/ZY114t00/1000158894-(1).jpg" alt="La Citadelle et ses Entraves" loading="lazy">
+                <div class="card-body">
+                    <p class="card-artist">Kervens Jean Baptiste</p>
+                    <p class="card-title">"La Citadelle et ses Entraves"</p>
+                    <p class="card-subtitle">L'histoire enchaînée, la pierre qui résiste.</p>
+                    <div class="share-btns">
+                        <a href="https://wa.me/?text=Découvre%20«%20La%20Citadelle%20et%20ses%20Entraves%20»%20de%20Kervens%20Jean%20Baptiste%20sur%20Eclipse%20Design" target="_blank" class="share-btn wa">📱 WhatsApp</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://vens942-png.github.io/Eclipse-design3/" target="_blank" class="share-btn fb">📘 Facebook</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Œuvre 2 - Sans nom - Kervens -->
+            <div class="galerie-card">
+                <img src="https://i.postimg.cc/9FrvjXWP/IMG-20260114-WA0000-080006.jpg" alt="Là où la pierre rêve" loading="lazy">
+                <div class="card-body">
+                    <p class="card-artist">Kervens Jean Baptiste</p>
+                    <p class="card-title">"Là où la pierre rêve."</p>
+                    <p class="card-subtitle">Une œuvre sans titre, une histoire sans fin.</p>
+                    <div class="share-btns">
+                        <a href="https://wa.me/?text=Découvre%20«%20Là%20où%20la%20pierre%20rêve%20»%20de%20Kervens%20Jean%20Baptiste%20sur%20Eclipse%20Design" target="_blank" class="share-btn wa">📱 WhatsApp</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://vens942-png.github.io/Eclipse-design3/" target="_blank" class="share-btn fb">📘 Facebook</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Œuvre 3 - Jennika EXPO -->
+            <div class="galerie-card">
+                <img src="https://i.postimg.cc/v8LWH5my/Picsart-26-05-28-16-37-59-620.jpg" alt="Jennika EXPO" loading="lazy">
+                <div class="card-body">
+                    <p class="card-artist">Jennika Jean Baptiste</p>
+                    <p class="card-title">"Elle fait parler les couleurs."</p>
+                    <p class="card-subtitle">Portrait d'une artiste devant ses œuvres — JB EXPO.</p>
+                    <div class="share-btns">
+                        <a href="https://wa.me/?text=Découvre%20Jennika%20Jean%20Baptiste%20sur%20Eclipse%20Design%20" target="_blank" class="share-btn wa">📱 WhatsApp</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://vens942-png.github.io/Eclipse-design3/" target="_blank" class="share-btn fb">📘 Facebook</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Œuvre 4 - Tableau 1 Jennika -->
+            <div class="galerie-card">
+                <img src="https://i.postimg.cc/T3bFpkLC/PXL-20241213-211822586-2-080007.jpg" alt="Un silence qui crie" loading="lazy">
+                <div class="card-body">
+                    <p class="card-artist">Jennika Jean Baptiste</p>
+                    <p class="card-title">"Un silence qui crie."</p>
+                    <p class="card-subtitle">Quand les émotions traversent la toile.</p>
+                    <div class="share-btns">
+                        <a href="https://wa.me/?text=Découvre%20«%20Un%20silence%20qui%20crie%20»%20de%20Jennika%20Jean%20Baptiste%20sur%20Eclipse%20Design" target="_blank" class="share-btn wa">📱 WhatsApp</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://vens942-png.github.io/Eclipse-design3/" target="_blank" class="share-btn fb">📘 Facebook</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Œuvre 5 - Tableau 2 Jennika -->
+            <div class="galerie-card">
+                <img src="https://i.postimg.cc/Jhm6tRWz/IMG-20260114-WA0002-080002.jpg" alt="L'éclat du dedans" loading="lazy">
+                <div class="card-body">
+                    <p class="card-artist">Jennika Jean Baptiste</p>
+                    <p class="card-title">"L'éclat du dedans."</p>
+                    <p class="card-subtitle">La lumière intérieure capturée sur la toile.</p>
+                    <div class="share-btns">
+                        <a href="https://wa.me/?text=Découvre%20«%20L'éclat%20du%20dedans%20»%20de%20Jennika%20Jean%20Baptiste%20sur%20Eclipse%20Design" target="_blank" class="share-btn wa">📱 WhatsApp</a>
+                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://vens942-png.github.io/Eclipse-design3/" target="_blank" class="share-btn fb">📘 Facebook</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>
