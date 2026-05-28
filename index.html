@@ -190,7 +190,6 @@
         }
         .share-btn.wa { background: #25D366; }
         .share-btn.fb { background: #1877F2; }
-        .share-btn.tw { background: #1DA1F2; }
 
         /* Chat */
         .chat-section {
@@ -294,6 +293,16 @@
         }
         .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(37,211,102,0.3); }
 
+        /* Bouton Galerie */
+        .galerie-float {
+            position: fixed; bottom: 100px; right: 25px; background: #a3ff3b;
+            color: #000; width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            z-index: 200; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .galerie-float:hover { transform: scale(1.1); box-shadow: 0 6px 20px rgba(163,255,59,0.3); }
+
         footer {
             border-top: 1px solid #222; padding: 40px; text-align: center;
             color: #555; font-size: 0.9rem; position: relative; z-index: 1;
@@ -312,6 +321,7 @@
             .modeles-scroll { padding: 10px 20px 20px; }
             .modele-card { width: 280px; }
             .whatsapp-float { width: 50px; height: 50px; font-size: 1.5rem; bottom: 15px; right: 15px; }
+            .galerie-float { width: 50px; height: 50px; font-size: 1.5rem; bottom: 80px; right: 15px; }
         }
     </style>
 </head>
@@ -477,7 +487,7 @@
                 </div>
             </div>
 
-            <!-- Œuvre 4 - Tableau 1 Jennika - L'éclat du dedans -->
+            <!-- Œuvre 4 - L'éclat du dedans - Jennika -->
             <div class="galerie-card">
                 <img src="https://i.postimg.cc/T3bFpkLC/PXL-20241213-211822586-2-080007.jpg" alt="L'éclat du dedans" loading="lazy">
                 <div class="card-body">
@@ -491,7 +501,7 @@
                 </div>
             </div>
 
-            <!-- Œuvre 5 - Tableau 2 Jennika - Un silence qui crie -->
+            <!-- Œuvre 5 - Un silence qui crie - Jennika -->
             <div class="galerie-card">
                 <img src="https://i.postimg.cc/Jhm6tRWz/IMG-20260114-WA0002-080002.jpg" alt="Un silence qui crie" loading="lazy">
                 <div class="card-body">
@@ -583,7 +593,11 @@
     </div>
 </section>
 
+<!-- Bouton WhatsApp flottant -->
 <a href="https://wa.me/50947873144" target="_blank" class="whatsapp-float" title="Discutons sur WhatsApp">💬</a>
+
+<!-- Bouton flottant Galerie d'Art -->
+<a href="#galerie" class="galerie-float" title="Voir la Galerie d'Art">🎨</a>
 
 <!-- Compteur protégé par mot de passe -->
 <div style="text-align:center; padding:10px 0; position:relative; z-index:1;" id="compteur-section">
