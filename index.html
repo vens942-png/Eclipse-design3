@@ -11,9 +11,9 @@
     <meta property="og:description" content="Branding visuel rapide pour entrepreneurs, artistes et commerçants. Logo, flyer, identité visuelle livrés en 72h.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://vens942-png.github.io/Eclipse-design3/">
-    <meta property="og:image" content="https://i.postimg.cc/tTn2hCzV/a179c216-f96f-4b14-b577-abb069e901ee.webp">
+    <meta property="og:image" content="https://i.postimg.cc/cHbyk30M/35155c86-4e3f-43cc-8f47-4065e3f90eec.webp">
 
-    <!-- Favicon -->
+    <!-- Favicon (logo vert miniature) -->
     <link rel="icon" type="image/webp" href="https://i.postimg.cc/tTn2hCzV/a179c216-f96f-4b14-b577-abb069e901ee.webp">
 
     <style>
@@ -32,7 +32,7 @@
             border-bottom: 1px solid #222;
             position: sticky;
             top: 0;
-            background: rgba(8,8,8,0.9);
+            background: rgba(8,8,8,0.95);
             backdrop-filter: blur(10px);
             z-index: 100;
         }
@@ -63,12 +63,15 @@
             transition: background 0.3s;
         }
         .btn-devis:hover { background: #fff; }
+
+        /* Hero */
         .hero {
             min-height: 90vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 60px 40px;
+            position: relative;
         }
         .hero h1 {
             font-size: clamp(3rem, 8vw, 7rem);
@@ -97,6 +100,21 @@
             background: #a3ff3b;
             display: inline-block;
         }
+
+        /* Bannière flyer dans le hero */
+        .hero-banner {
+            margin: 25px 0;
+            max-width: 600px;
+            border: 1px solid #222;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .hero-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         .hero p {
             font-size: 1.2rem;
             color: #999;
@@ -117,6 +135,7 @@
             transition: background 0.3s;
         }
         .hero .cta:hover { background: #fff; }
+
         section { padding: 80px 40px; }
         section h2 {
             font-size: clamp(2rem, 5vw, 4rem);
@@ -125,6 +144,8 @@
             margin-bottom: 30px;
         }
         section h2 span { color: #a3ff3b; }
+
+        /* Services */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -166,7 +187,20 @@
         .highlight-card .icon { background: rgba(0,0,0,0.2); }
         .highlight-card p { color: #111; }
 
-        /* Section Modèles – Défilement horizontal */
+        /* Image design supplémentaire dans services */
+        .services-illustration {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .services-illustration img {
+            max-width: 500px;
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            border: 1px solid #1a1a1a;
+        }
+
+        /* Section Modèles */
         .modeles-section {
             background: #0a0a0a;
             border-top: 1px solid #1a1a1a;
@@ -288,6 +322,7 @@
             color: #000;
         }
 
+        /* À propos */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -295,19 +330,17 @@
             align-items: center;
         }
         .about-img {
-            background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
             border: 1px solid #a3ff3b;
-            aspect-ratio: 3/4;
-            max-width: 350px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 4px;
             overflow: hidden;
+            aspect-ratio: 4/3;
+            max-width: 450px;
         }
         .about-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
         .about-text p {
             color: #999;
@@ -316,6 +349,7 @@
         }
         .about-text strong { color: #fff; }
 
+        /* Contact */
         .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -447,8 +481,9 @@
             width: 60px;
             height: auto;
             margin-bottom: 15px;
-            opacity: 0.6;
+            opacity: 0.7;
         }
+
         @media (max-width: 768px) {
             header { padding: 15px 20px; }
             nav { gap: 12px; }
@@ -467,8 +502,9 @@
 <body>
 
 <header>
+    <!-- Logo blanc sur fond noir -->
     <a href="#" style="display:flex; align-items:center; text-decoration:none;">
-        <img src="https://i.postimg.cc/tTn2hCzV/a179c216-f96f-4b14-b577-abb069e901ee.webp" alt="Eclipse Design Logo" class="logo-img">
+        <img src="https://i.postimg.cc/Zq6WSTCR/d124f54b-dafb-4cb4-b734-3806ad372826.webp" alt="Eclipse Design" class="logo-img">
     </a>
     <nav>
         <a href="#services">Services</a>
@@ -482,6 +518,12 @@
 <section class="hero">
     <div class="tag"><span class="line"></span> Studio de Création</div>
     <h1>L'image<br><span class="outline">qui frappe.</span></h1>
+
+    <!-- Bannière flyer entre le titre et la description -->
+    <div class="hero-banner">
+        <img src="https://i.postimg.cc/kX7FYpYp/Picsart-26-05-27-20-08-31-004.jpg" alt="Flyer Eclipse Design Premium">
+    </div>
+
     <p>Branding visuel rapide pour entrepreneurs, artistes et commerçants. <strong>Logo, flyer, identité visuelle livrés en 72h.</strong></p>
     <a href="#contact" class="cta">Demander un devis gratuit →</a>
 </section>
@@ -515,6 +557,11 @@
             <p>Pack complet livré en 72h pour les entrepreneurs pressés qui veulent du pro, tout de suite.</p>
         </div>
     </div>
+
+    <!-- Image design supplémentaire -->
+    <div class="services-illustration">
+        <img src="https://i.postimg.cc/MpH9pLwJ/vector-man-working-computer-graphic-designing-with-pen-tool-1272652-757.jpg" alt="Design graphique illustration" loading="lazy">
+    </div>
 </section>
 
 <section id="modeles" class="modeles-section">
@@ -529,7 +576,10 @@
             <img src="https://i.postimg.cc/rp2yCN31/behance-project-1729211612297.jpg" alt="Modèle Flyer 2" loading="lazy">
             <div class="modele-label">Modèle <span>Behance Project</span></div>
         </div>
-        <!-- Ajoute d'autres cartes ici si tu as plus de modèles -->
+        <div class="modele-card">
+            <img src="https://i.postimg.cc/xCrFXPf3/Haute-Tension-Vol-2-20250703-091711-0000.png" alt="Modèle Party" loading="lazy">
+            <div class="modele-label">Modèle <span>Haute Tension Party</span></div>
+        </div>
     </div>
 </section>
 
@@ -560,10 +610,10 @@
 </section>
 
 <section id="about">
-    <h2>Derrière <span>Eclipse Design</span></h2>
+    <h2>Derrières <span>Eclipse Design</span></h2>
     <div class="about-grid">
         <div class="about-img">
-            <img src="https://i.postimg.cc/tTn2hCzV/a179c216-f96f-4b14-b577-abb069e901ee.webp" alt="Logo Eclipse Design">
+            <img src="https://i.postimg.cc/J0HF0dJ2/flat-isometric-illustration-graphic-designer-workspace-1058698-1428.jpg" alt="Graphic designer workspace" loading="lazy">
         </div>
         <div class="about-text">
             <p>Je suis créatif, graphiste et passionné par la puissance des images.</p>
@@ -579,7 +629,8 @@
     <p style="color:#999; margin-bottom:30px; max-width:500px;">Contactez-moi directement ou remplissez le formulaire. Je vous réponds sous 24h.</p>
     <div class="contact-grid">
         <div class="contact-info">
-            <img src="https://i.postimg.cc/tTn2hCzV/a179c216-f96f-4b14-b577-abb069e901ee.webp" alt="Eclipse Design" class="contact-logo">
+            <!-- Logo noir pour contraster avec fond sombre -->
+            <img src="https://i.postimg.cc/Zq6WSTCR/d124f54b-dafb-4cb4-b734-3806ad372826.webp" alt="Eclipse Design" class="contact-logo">
             <a href="https://wa.me/50947873144" target="_blank" class="contact-item">
                 <div class="contact-icon">💬</div>
                 <div>
@@ -610,7 +661,7 @@
 <a href="https://wa.me/50947873144" target="_blank" class="whatsapp-float" title="Discutons sur WhatsApp">💬</a>
 
 <footer>
-    <img src="https://i.postimg.cc/tTn2hCzV/a179c216-f96f-4b14-b577-abb069e901ee.webp" alt="Eclipse Design" class="footer-logo">
+    <img src="https://i.postimg.cc/Zq6WSTCR/d124f54b-dafb-4cb4-b734-3806ad372826.webp" alt="Eclipse Design" class="footer-logo">
     <p>© Eclipse Design – L'image qui frappe. Tous droits réservés.</p>
 </footer>
 
