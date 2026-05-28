@@ -187,7 +187,7 @@
         .highlight-card .icon { background: rgba(0,0,0,0.2); }
         .highlight-card p { color: #111; }
 
-        /* Image design supplémentaire dans services */
+        /* Image design supplémentaire */
         .services-illustration {
             text-align: center;
             margin-top: 50px;
@@ -270,6 +270,34 @@
         .modele-label span {
             color: #a3ff3b;
         }
+
+        /* Section Chat bot */
+        .chat-section {
+            background: #0a0a0a;
+            border-top: 1px solid #1a1a1a;
+            border-bottom: 1px solid #1a1a1a;
+            text-align: center;
+            padding: 60px 40px;
+        }
+        .chat-section h2 span { color: #a3ff3b; }
+        .chat-section p {
+            color: #999;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+        }
+        .chat-btn {
+            display: inline-block;
+            background: #a3ff3b;
+            color: #000;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        .chat-btn:hover { background: #fff; }
 
         /* Avis */
         .avis-grid {
@@ -510,6 +538,7 @@
         <a href="#modeles">Modèles</a>
         <a href="#avis">Avis</a>
         <a href="#about">À propos</a>
+        <a href="#chat-section">Chat</a>
         <a href="#contact" class="btn-devis">Devis</a>
     </nav>
 </header>
@@ -578,6 +607,13 @@
             <div class="modele-label">Modèle <span>Haute Tension Party</span></div>
         </div>
     </div>
+</section>
+
+<!-- Section Chat Eclipse Design -->
+<section id="chat-section" class="chat-section">
+    <h2>Parlez à <span>Eclipse Design</span></h2>
+    <p>Une question ? Un projet ? Discutez avec notre assistant en direct.</p>
+    <a href="#" class="chat-btn" onclick="document.querySelector('#tidio-chat iframe')?.contentWindow?.postMessage('open', '*'); return false;">💬 Ouvrir le chat</a>
 </section>
 
 <section id="avis" style="background:#0a0a0a; border-top:1px solid #1a1a1a; border-bottom:1px solid #1a1a1a;">
@@ -663,6 +699,9 @@
 
 <!-- Tidio Chat -->
 <script src="//code.tidio.co/qe52uuulcolwly3l1f5f8zmjjyo1rud1.js" async></script>
+
+<!-- MicroAnalytics -->
+<script data-host="https://app.microanalytics.io" data-dnt="false" src="https://app.microanalytics.io/js/script.js" id="ZwSg9rf6GA" async defer></script>
 
 </body>
 </html>
