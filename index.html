@@ -435,6 +435,22 @@
 
 <a href="https://wa.me/50947873144" target="_blank" class="whatsapp-float" title="Discutons sur WhatsApp">💬</a>
 
+<!-- Compteur protégé par mot de passe -->
+<div style="text-align:center; padding:10px 0;" id="compteur-section">
+    <button onclick="showCompteur()" style="background:none; border:1px solid #333; color:#555; padding:5px 15px; cursor:pointer; font-size:0.7rem; text-transform:uppercase; letter-spacing:1px;">📊 Stats</button>
+</div>
+
+<script>
+function showCompteur() {
+    var password = prompt("Mot de passe pour voir les statistiques :");
+    if (password === "eclipse2024") {
+        document.getElementById("compteur-section").innerHTML = '<img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fvens942-png.github.io%2FEclipse-design3%2F&count_bg=%23a3ff3b&title_bg=%23080808&title=Visites&edge_flat=true" alt="Compteur" style="height:28px;">';
+    } else {
+        alert("Mot de passe incorrect.");
+    }
+}
+</script>
+
 <footer>
     <img src="https://i.postimg.cc/Zq6WSTCR/d124f54b-dafb-4cb4-b734-3806ad372826.webp" alt="Eclipse Design" class="footer-logo">
     <p>© Eclipse Design – L'image qui frappe. Tous droits réservés.</p>
