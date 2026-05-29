@@ -27,22 +27,6 @@
             overflow-x: hidden;
         }
 
-        /* Animations au scroll */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .reveal-delay-1 { transition-delay: 0.03s; }
-        .reveal-delay-2 { transition-delay: 0.06s; }
-        .reveal-delay-3 { transition-delay: 0.09s; }
-        .reveal-delay-4 { transition-delay: 0.12s; }
-        .reveal-delay-5 { transition-delay: 0.15s; }
-
         /* Pulse */
         @keyframes pulse {
             0%, 100% { box-shadow: 0 0 0 0 rgba(163,255,59,0.4); }
@@ -443,64 +427,56 @@
 </header>
 
 <section class="hero">
-    <div class="reveal">
-        <div class="tag"><span class="line"></span> Studio de Création</div>
-        <h1>L'image<br><span class="outline">qui frappe.</span></h1>
-    </div>
+    <div class="tag"><span class="line"></span> Studio de Création</div>
+    <h1>L'image<br><span class="outline">qui frappe.</span></h1>
 
-    <div class="hero-banner reveal reveal-delay-1">
+    <div class="hero-banner">
         <img src="https://i.postimg.cc/7YVGjG3Y/Picsart-26-05-29-16-59-28-137.jpg" alt="Flyer Regard Créatif Officiel">
     </div>
 
-    <div class="reveal reveal-delay-2">
-        <p>Branding visuel rapide pour entrepreneurs, artistes et commerçants. <strong>Logo, flyer, identité visuelle livrés en 72h.</strong></p>
-        <a href="#contact" class="cta pulse">Demander un devis gratuit →</a>
-    </div>
+    <p>Branding visuel rapide pour entrepreneurs, artistes et commerçants. <strong>Logo, flyer, identité visuelle livrés en 72h.</strong></p>
+    <a href="#contact" class="cta pulse">Demander un devis gratuit →</a>
 </section>
 
 <section id="services">
-    <div class="reveal">
-        <h2>Ce que nous <span>créons</span> pour vous</h2>
-    </div>
+    <h2>Ce que nous <span>créons</span> pour vous</h2>
     <div class="services-grid">
-        <div class="service-card reveal reveal-delay-1">
+        <div class="service-card">
             <div class="icon">✏️</div>
             <h3>Logo professionnel</h3>
             <p>La première empreinte de votre marque. Sobre, mémorable, unique.</p>
         </div>
-        <div class="service-card reveal reveal-delay-2">
+        <div class="service-card">
             <div class="icon">🖼️</div>
             <h3>Flyer & affiche</h3>
             <p>Votre message en une image. Print ou digital, prêt à marquer les esprits.</p>
         </div>
-        <div class="service-card reveal reveal-delay-3">
+        <div class="service-card">
             <div class="icon">📐</div>
             <h3>Identité visuelle complète</h3>
             <p>Logo, couleurs, typographie, charte graphique. Tout pour exister avec cohérence.</p>
         </div>
-        <div class="service-card reveal reveal-delay-4">
+        <div class="service-card">
             <div class="icon">📱</div>
             <h3>Bannière réseaux sociaux</h3>
             <p>Facebook, Instagram, LinkedIn. Une présence numérique qui claque.</p>
         </div>
-        <div class="service-card highlight-card reveal reveal-delay-5">
+        <div class="service-card highlight-card">
             <div class="icon">⚡</div>
             <h3>Branding accéléré</h3>
             <p>Pack complet livré en 72h pour les entrepreneurs pressés qui veulent du pro, tout de suite.</p>
         </div>
     </div>
 
-    <div class="services-illustration reveal">
+    <div class="services-illustration">
         <img src="https://i.postimg.cc/MpH9pLwJ/vector-man-working-computer-graphic-designing-with-pen-tool-1272652-757.jpg" alt="Design graphique illustration" loading="lazy">
     </div>
 </section>
 
 <section id="modeles" class="modeles-section">
-    <div class="reveal">
-        <h2>Nos <span>Modèles</span></h2>
-        <p class="modeles-subtitle">Quelques créations pour vous inspirer. Faites défiler →</p>
-    </div>
-    <div class="modeles-scroll reveal reveal-delay-1">
+    <h2>Nos <span>Modèles</span></h2>
+    <p class="modeles-subtitle">Quelques créations pour vous inspirer. Faites défiler →</p>
+    <div class="modeles-scroll">
         <div class="modele-card">
             <img src="https://i.postimg.cc/hjhL8nHf/1-20250813-070918-0000.png" alt="Modèle Flyer 1" loading="lazy">
             <div class="modele-label">Modèle <span>Flyer Premium</span></div>
@@ -521,28 +497,24 @@
 
     <div style="position:relative; z-index:1; max-width:1200px; margin:0 auto;">
         
-        <div class="reveal">
-            <h2 style="font-size:clamp(2rem,5vw,4rem); font-weight:900; text-transform:uppercase; text-align:center; margin-bottom:10px; color:#fff;">
-                Galerie <span style="color:#fff;">d'Art</span>
-            </h2>
-            <p style="text-align:center; color:#777; font-size:1rem; margin-bottom:15px; font-style:italic;">
-                "Deux regards, une signature."
-            </p>
-        </div>
+        <h2 style="font-size:clamp(2rem,5vw,4rem); font-weight:900; text-transform:uppercase; text-align:center; margin-bottom:10px; color:#fff;">
+            Galerie <span style="color:#fff;">d'Art</span>
+        </h2>
+        <p style="text-align:center; color:#777; font-size:1rem; margin-bottom:15px; font-style:italic;">
+            "Deux regards, une signature."
+        </p>
 
-        <div class="reveal reveal-delay-1" style="margin:30px 0; border-radius:8px; overflow:hidden; border:1px solid #222;">
+        <div style="margin:30px 0; border-radius:8px; overflow:hidden; border:1px solid #222;">
             <img src="https://i.postimg.cc/d0yCMyfp/JB_EXPO.jpg" alt="JB EXPO" style="width:100%; height:auto; display:block;">
         </div>
 
-        <div class="reveal reveal-delay-2">
-            <p style="text-align:center; color:#999; font-size:1rem; max-width:700px; margin:25px auto 40px; line-height:1.8;">
-                Jennika & Kervens Jean Baptiste — L'art de transformer l'invisible en visible. Chaque toile est une brèche ouverte sur un monde intérieur.<br>
-                <strong style="color:#a3ff3b;">Pièces uniques • Sur commande</strong>
-            </p>
-        </div>
+        <p style="text-align:center; color:#999; font-size:1rem; max-width:700px; margin:25px auto 40px; line-height:1.8;">
+            Jennika & Kervens Jean Baptiste — L'art de transformer l'invisible en visible. Chaque toile est une brèche ouverte sur un monde intérieur.<br>
+            <strong style="color:#a3ff3b;">Pièces uniques • Sur commande</strong>
+        </p>
 
         <!-- Lien article Le Nouvelliste -->
-        <div class="reveal reveal-delay-3" style="text-align:center; margin-bottom:40px;">
+        <div style="text-align:center; margin-bottom:40px;">
             <a href="https://lenouvelliste.com/article/252288/lunivers-pictural-de-jennika-jean-baptiste" target="_blank" style="display:inline-block; background:rgba(255,255,255,0.03); color:#ccc; border:1px solid #333; padding:10px 25px; border-radius:25px; text-decoration:none; font-size:0.9rem; font-weight:600; transition:all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.08)'; this.style.color='#fff';" onmouseout="this.style.background='rgba(255,255,255,0.03)'; this.style.color='#ccc';">
                 📰 L'univers pictural de Jennika Jean-Baptiste — Le Nouvelliste
             </a>
@@ -551,7 +523,7 @@
         <div class="galerie-grid">
 
             <!-- Œuvre 1 - Citadelle - Kervens -->
-            <div class="galerie-card reveal reveal-delay-1">
+            <div class="galerie-card">
                 <img src="https://i.postimg.cc/ZY114t00/1000158894-(1).jpg" alt="La Citadelle et ses Entraves" loading="lazy">
                 <div class="card-body">
                     <p class="card-artist">Kervens Jean Baptiste</p>
@@ -565,7 +537,7 @@
             </div>
 
             <!-- Œuvre 2 - Sans nom - Kervens -->
-            <div class="galerie-card reveal reveal-delay-2">
+            <div class="galerie-card">
                 <img src="https://i.postimg.cc/9FrvjXWP/IMG-20260114-WA0000-080006.jpg" alt="Là où la pierre rêve" loading="lazy">
                 <div class="card-body">
                     <p class="card-artist">Kervens Jean Baptiste</p>
@@ -579,7 +551,7 @@
             </div>
 
             <!-- Œuvre 3 - Jennika EXPO -->
-            <div class="galerie-card reveal reveal-delay-3">
+            <div class="galerie-card">
                 <img src="https://i.postimg.cc/v8LWH5my/Picsart-26-05-28-16-37-59-620.jpg" alt="Jennika EXPO" loading="lazy">
                 <div class="card-body">
                     <p class="card-artist">Jennika Jean Baptiste</p>
@@ -593,7 +565,7 @@
             </div>
 
             <!-- Œuvre 4 - L'éclat du dedans - Jennika -->
-            <div class="galerie-card reveal reveal-delay-4">
+            <div class="galerie-card">
                 <img src="https://i.postimg.cc/T3bFpkLC/PXL-20241213-211822586-2-080007.jpg" alt="L'éclat du dedans" loading="lazy">
                 <div class="card-body">
                     <p class="card-artist">Jennika Jean Baptiste</p>
@@ -607,7 +579,7 @@
             </div>
 
             <!-- Œuvre 5 - Un silence qui crie - Jennika -->
-            <div class="galerie-card reveal reveal-delay-5">
+            <div class="galerie-card">
                 <img src="https://i.postimg.cc/Jhm6tRWz/IMG-20260114-WA0002-080002.jpg" alt="Un silence qui crie" loading="lazy">
                 <div class="card-body">
                     <p class="card-artist">Jennika Jean Baptiste</p>
@@ -625,50 +597,44 @@
 </section>
 
 <section id="chat-section" class="chat-section">
-    <div class="reveal">
-        <h2>Parlez à <span>Regard Créatif</span></h2>
-        <p>Une question ? Un projet ? Discutez avec notre assistant en direct.</p>
-        <a href="#" class="chat-btn pulse" onclick="document.querySelector('#tidio-chat iframe')?.contentWindow?.postMessage('open', '*'); return false;">💬 Ouvrir le chat</a>
-    </div>
+    <h2>Parlez à <span>Regard Créatif</span></h2>
+    <p>Une question ? Un projet ? Discutez avec notre assistant en direct.</p>
+    <a href="#" class="chat-btn pulse" onclick="document.querySelector('#tidio-chat iframe')?.contentWindow?.postMessage('open', '*'); return false;">💬 Ouvrir le chat</a>
 </section>
 
 <section id="avis" style="background:#0a0a0a; border-top:1px solid #1a1a1a; border-bottom:1px solid #1a1a1a;">
-    <div class="reveal">
-        <h2 style="text-align:center;">Ce que <span>nos clients</span> disent</h2>
-        <p style="text-align:center; color:#777; margin-bottom:50px;">Votre satisfaction est notre meilleure récompense.</p>
-    </div>
+    <h2 style="text-align:center;">Ce que <span>nos clients</span> disent</h2>
+    <p style="text-align:center; color:#777; margin-bottom:50px;">Votre satisfaction est notre meilleure récompense.</p>
     <div class="avis-grid">
-        <div class="avis-card reveal reveal-delay-1">
+        <div class="avis-card">
             <div class="avis-stars">★★★★★</div>
             <p class="avis-text">"Regard Créatif a créé mon logo en un temps record. Professionnel, créatif, à l'écoute. Je recommande à 100%."</p>
             <span class="avis-author">— Jean R., Entrepreneur</span>
         </div>
-        <div class="avis-card reveal reveal-delay-2">
+        <div class="avis-card">
             <div class="avis-stars">★★★★★</div>
             <p class="avis-text">"Mon flyer a fait sensation. Livraison rapide, design percutant. C'est exactement ce que je voulais."</p>
             <span class="avis-author">— Marie L., Commerçante</span>
         </div>
-        <div class="avis-card reveal reveal-delay-3">
+        <div class="avis-card">
             <div class="avis-stars">★★★★★</div>
             <p class="avis-text">"Une identité visuelle complète qui a transformé mon entreprise. Du grand art. Merci Regard Créatif."</p>
             <span class="avis-author">— Pierre K., Start-up</span>
         </div>
     </div>
-    <div class="reveal" style="text-align:center; margin-top:40px;">
+    <div style="text-align:center; margin-top:40px;">
         <p style="color:#999; margin-bottom:15px;">Vous avez travaillé avec nous ?</p>
         <a href="https://wa.me/50947873144?text=Bonjour%20Regard%20Créatif,%20je%20veux%20laisser%20un%20avis%20!" target="_blank" class="btn-avis">Laisser un avis ⭐</a>
     </div>
 </section>
 
 <section id="about">
-    <div class="reveal">
-        <h2>Derrières <span>Regard Créatif</span></h2>
-    </div>
+    <h2>Derrières <span>Regard Créatif</span></h2>
     <div class="about-grid">
-        <div class="about-img reveal reveal-delay-1">
+        <div class="about-img">
             <img src="https://i.postimg.cc/J0HF0dJ2/flat-isometric-illustration-graphic-designer-workspace-1058698-1428.jpg" alt="Graphic designer workspace" loading="lazy">
         </div>
-        <div class="about-text reveal reveal-delay-2">
+        <div class="about-text">
             <p>Je suis créatif, graphiste et passionné par la puissance des images.</p>
             <p>Regard Créatif est né d'un constat simple : les petits entrepreneurs, les artistes, les indépendants n'ont pas accès à un design de qualité sans se ruiner.</p>
             <p>Mon objectif : leur offrir une identité visuelle qui frappe, rapidement, sans compromis.</p>
@@ -678,12 +644,10 @@
 </section>
 
 <section id="contact">
-    <div class="reveal">
-        <h2>Prêt à faire naître votre <span>image</span> ?</h2>
-        <p style="color:#999; margin-bottom:30px; max-width:500px;">Contactez-moi directement ou remplissez le formulaire. Je vous réponds sous 24h.</p>
-    </div>
+    <h2>Prêt à faire naître votre <span>image</span> ?</h2>
+    <p style="color:#999; margin-bottom:30px; max-width:500px;">Contactez-moi directement ou remplissez le formulaire. Je vous réponds sous 24h.</p>
     <div class="contact-grid">
-        <div class="contact-info reveal reveal-delay-1">
+        <div class="contact-info">
             <img src="https://i.postimg.cc/zBKxQ83F/1e7d8c1a-6f24-493d-9470-2d1fc231b98b.webp" alt="Regard Créatif" class="contact-logo">
             <a href="https://wa.me/50947873144" target="_blank" class="contact-item">
                 <div class="contact-icon">💬</div>
@@ -694,7 +658,7 @@
                 <div><div class="contact-label">Email</div><div class="contact-value">regardcreatif@proton.me</div></div>
             </a>
         </div>
-        <form class="contact-form reveal reveal-delay-2" action="https://formspree.io/f/mbdbpkoy" method="POST">
+        <form class="contact-form" action="https://formspree.io/f/mbdbpkoy" method="POST">
             <input type="text" name="name" placeholder="Votre nom" required>
             <input type="email" name="email" placeholder="votre@email.com" required>
             <textarea name="message" placeholder="Parlez-moi de votre marque..." required></textarea>
@@ -737,21 +701,6 @@
 </div>
 
 <script>
-// Animation au scroll
-function revealOnScroll() {
-    var reveals = document.querySelectorAll('.reveal');
-    for (var i = 0; i < reveals.length; i++) {
-        var windowHeight = window.innerHeight;
-        var elementTop = reveals[i].getBoundingClientRect().top;
-        var elementVisible = 30;
-        if (elementTop < windowHeight - elementVisible) {
-            reveals[i].classList.add('visible');
-        }
-    }
-}
-window.addEventListener('scroll', revealOnScroll);
-revealOnScroll();
-
 // Compteur
 function showCompteur() {
     var password = prompt("Mot de passe pour voir les statistiques :");
