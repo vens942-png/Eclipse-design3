@@ -41,8 +41,32 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-        .float {
-            animation: float 4s ease-in-out infinite;
+
+        /* Robot */
+        @keyframes wave {
+            0%, 100% { transform: rotate(0deg); }
+            30% { transform: rotate(20deg); }
+            60% { transform: rotate(-12deg); }
+            80% { transform: rotate(8deg); }
+        }
+        @keyframes robotBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .robot-float {
+            position: fixed; bottom: 250px; right: 18px;
+            width: 70px; height: 70px; z-index: 200;
+            cursor: pointer; animation: robotBounce 3s ease-in-out infinite;
+            transition: transform 0.3s, filter 0.3s;
+            filter: drop-shadow(0 0 8px rgba(163,255,59,0.4));
+        }
+        .robot-float:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 20px rgba(163,255,59,0.8));
+        }
+        .robot-arm {
+            animation: wave 1.2s ease-in-out infinite;
+            transform-origin: 21px 38px;
         }
 
         header {
@@ -401,6 +425,7 @@
             .whatsapp-float { width: 50px; height: 50px; font-size: 1.5rem; bottom: 15px; right: 15px; }
             .galerie-float { width: 50px; height: 50px; font-size: 1.4rem; bottom: 80px; right: 15px; }
             .flip-float { width: 50px; height: 50px; font-size: 1.2rem; bottom: 145px; right: 15px; }
+            .robot-float { width: 55px; height: 55px; bottom: 210px; right: 12px; }
         }
     </style>
 </head>
@@ -693,6 +718,88 @@
             </div>
         </div>
     </div>
+</div>
+
+<!-- Robot futuriste flottant -->
+<div class="robot-float" onclick="document.querySelector('#tidio-chat iframe')?.contentWindow?.postMessage('open', '*')" title="Coucou ! Discutons">
+    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="glow">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                    <feMergeNode in="coloredBlur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+            <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#a3ff3b;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#7acc00;stop-opacity:1"/>
+            </linearGradient>
+            <linearGradient id="headGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#b8ff4a;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#8de000;stop-opacity:1"/>
+            </linearGradient>
+        </defs>
+        
+        <!-- Halo arrière -->
+        <circle cx="60" cy="55" r="50" fill="none" stroke="#a3ff3b" stroke-width="1" opacity="0.3" filter="url(#glow)"/>
+        <circle cx="60" cy="55" r="45" fill="none" stroke="#a3ff3b" stroke-width="0.5" opacity="0.15" stroke-dasharray="4 6"/>
+        
+        <!-- Antenne -->
+        <line x1="60" y1="18" x2="60" y2="6" stroke="#a3ff3b" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+        <circle cx="60" cy="4" r="5" fill="url(#headGrad)" filter="url(#glow)"/>
+        <circle cx="60" cy="4" r="2" fill="#fff" opacity="0.8"/>
+        
+        <!-- Corps -->
+        <rect x="28" y="48" width="64" height="50" rx="18" fill="url(#bodyGrad)" filter="url(#glow)"/>
+        
+        <!-- Détails corps - lignes néon -->
+        <line x1="38" y1="58" x2="82" y2="58" stroke="#080808" stroke-width="1.5" opacity="0.4"/>
+        <line x1="38" y1="65" x2="82" y2="65" stroke="#080808" stroke-width="1.5" opacity="0.4"/>
+        <line x1="38" y1="72" x2="82" y2="72" stroke="#080808" stroke-width="1.5" opacity="0.4"/>
+        
+        <!-- Cœur lumineux -->
+        <circle cx="60" cy="68" r="8" fill="#080808" opacity="0.5"/>
+        <circle cx="60" cy="68" r="4" fill="#a3ff3b" filter="url(#glow)">
+            <animate attributeName="r" values="3;5;3" dur="1.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+        </circle>
+        
+        <!-- Tête -->
+        <rect x="30" y="22" width="60" height="34" rx="16" fill="url(#headGrad)" filter="url(#glow)"/>
+        
+        <!-- Visière -->
+        <rect x="35" y="30" width="50" height="18" rx="9" fill="#080808" opacity="0.7"/>
+        
+        <!-- Yeux -->
+        <circle cx="48" cy="38" r="5" fill="#a3ff3b" filter="url(#glow)"/>
+        <circle cx="48" cy="38" r="2" fill="#fff" opacity="0.9"/>
+        <circle cx="72" cy="38" r="5" fill="#a3ff3b" filter="url(#glow)"/>
+        <circle cx="72" cy="38" r="2" fill="#fff" opacity="0.9"/>
+        
+        <!-- Sourire -->
+        <path d="M47 45 Q60 50 73 45" stroke="#a3ff3b" stroke-width="1.5" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+        
+        <!-- Bras gauche (fait coucou) -->
+        <g class="robot-arm">
+            <rect x="16" y="52" width="12" height="6" rx="3" fill="url(#bodyGrad)" filter="url(#glow)"/>
+            <rect x="18" y="40" width="6" height="14" rx="3" fill="url(#headGrad)"/>
+            <circle cx="21" cy="38" r="7" fill="url(#headGrad)" filter="url(#glow)"/>
+            <circle cx="21" cy="38" r="3" fill="#a3ff3b"/>
+        </g>
+        
+        <!-- Bras droit -->
+        <rect x="92" y="56" width="12" height="6" rx="3" fill="url(#bodyGrad)" filter="url(#glow)"/>
+        <rect x="96" y="48" width="6" height="10" rx="3" fill="url(#headGrad)"/>
+        
+        <!-- Jambes -->
+        <rect x="36" y="90" width="14" height="18" rx="7" fill="url(#bodyGrad)" filter="url(#glow)"/>
+        <rect x="70" y="90" width="14" height="18" rx="7" fill="url(#bodyGrad)" filter="url(#glow)"/>
+        
+        <!-- Pieds -->
+        <rect x="32" y="104" width="20" height="8" rx="4" fill="#080808" opacity="0.6"/>
+        <rect x="68" y="104" width="20" height="8" rx="4" fill="#080808" opacity="0.6"/>
+    </svg>
 </div>
 
 <!-- Compteur protégé par mot de passe -->
