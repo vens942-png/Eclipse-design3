@@ -32,9 +32,7 @@
             0%, 100% { box-shadow: 0 0 0 0 rgba(163,255,59,0.4); }
             50% { box-shadow: 0 0 0 15px rgba(163,255,59,0); }
         }
-        .pulse {
-            animation: pulse 2.5s infinite;
-        }
+        .pulse { animation: pulse 2.5s infinite; }
 
         /* Float */
         @keyframes float {
@@ -43,30 +41,38 @@
         }
 
         /* Robot */
-        @keyframes wave {
-            0%, 100% { transform: rotate(0deg); }
-            30% { transform: rotate(20deg); }
-            60% { transform: rotate(-12deg); }
-            80% { transform: rotate(8deg); }
+        @keyframes waveArm {
+            0%, 100% { transform: rotate(-5deg); }
+            30% { transform: rotate(25deg); }
+            60% { transform: rotate(-15deg); }
+            85% { transform: rotate(10deg); }
         }
         @keyframes robotBounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-14px); }
+        }
+        @keyframes eyeBlink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
         }
         .robot-float {
-            position: fixed; bottom: 250px; right: 18px;
-            width: 70px; height: 70px; z-index: 200;
+            position: fixed; bottom: 240px; right: 12px;
+            width: 80px; height: 80px; z-index: 200;
             cursor: pointer; animation: robotBounce 3s ease-in-out infinite;
             transition: transform 0.3s, filter 0.3s;
-            filter: drop-shadow(0 0 8px rgba(163,255,59,0.4));
+            filter: drop-shadow(0 0 10px rgba(163,255,59,0.5));
         }
         .robot-float:hover {
-            transform: scale(1.2);
-            filter: drop-shadow(0 0 20px rgba(163,255,59,0.8));
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 25px rgba(163,255,59,0.9));
         }
-        .robot-arm {
-            animation: wave 1.2s ease-in-out infinite;
-            transform-origin: 21px 38px;
+        .robot-arm-group {
+            animation: waveArm 1.2s ease-in-out infinite;
+            transform-origin: 30px 55px;
+        }
+        .robot-eye {
+            animation: eyeBlink 3s ease-in-out infinite;
+            transform-origin: center;
         }
 
         header {
@@ -425,7 +431,7 @@
             .whatsapp-float { width: 50px; height: 50px; font-size: 1.5rem; bottom: 15px; right: 15px; }
             .galerie-float { width: 50px; height: 50px; font-size: 1.4rem; bottom: 80px; right: 15px; }
             .flip-float { width: 50px; height: 50px; font-size: 1.2rem; bottom: 145px; right: 15px; }
-            .robot-float { width: 55px; height: 55px; bottom: 210px; right: 12px; }
+            .robot-float { width: 65px; height: 65px; bottom: 205px; right: 8px; }
         }
     </style>
 </head>
@@ -722,83 +728,121 @@
 
 <!-- Robot futuriste flottant -->
 <div class="robot-float" onclick="document.querySelector('#tidio-chat iframe')?.contentWindow?.postMessage('open', '*')" title="Coucou ! Discutons">
-    <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <filter id="glow">
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                </feMerge>
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
             </filter>
-            <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#a3ff3b;stop-opacity:1"/>
-                <stop offset="100%" style="stop-color:#7acc00;stop-opacity:1"/>
-            </linearGradient>
-            <linearGradient id="headGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" style="stop-color:#b8ff4a;stop-opacity:1"/>
+            <filter id="glowStrong">
+                <feGaussianBlur stdDeviation="5" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <radialGradient id="bodyGrad" cx="50%" cy="40%" r="60%">
+                <stop offset="0%" style="stop-color:#c5ff5a;stop-opacity:1"/>
+                <stop offset="60%" style="stop-color:#a3ff3b;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#6ab800;stop-opacity:1"/>
+            </radialGradient>
+            <radialGradient id="headGrad" cx="50%" cy="35%" r="65%">
+                <stop offset="0%" style="stop-color:#d4ff7a;stop-opacity:1"/>
                 <stop offset="100%" style="stop-color:#8de000;stop-opacity:1"/>
-            </linearGradient>
+            </radialGradient>
+            <radialGradient id="visorGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#0a0a15;stop-opacity:1"/>
+            </radialGradient>
+            <radialGradient id="heartGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" style="stop-color:#fff;stop-opacity:1"/>
+                <stop offset="40%" style="stop-color:#a3ff3b;stop-opacity:1"/>
+                <stop offset="100%" style="stop-color:#5a9900;stop-opacity:1"/>
+            </radialGradient>
         </defs>
         
-        <!-- Halo arrière -->
-        <circle cx="60" cy="55" r="50" fill="none" stroke="#a3ff3b" stroke-width="1" opacity="0.3" filter="url(#glow)"/>
-        <circle cx="60" cy="55" r="45" fill="none" stroke="#a3ff3b" stroke-width="0.5" opacity="0.15" stroke-dasharray="4 6"/>
+        <!-- Halo orbital -->
+        <ellipse cx="150" cy="145" rx="120" ry="30" fill="none" stroke="#a3ff3b" stroke-width="1" opacity="0.2" transform="rotate(-15 150 145)" filter="url(#glow)"/>
+        <ellipse cx="150" cy="145" rx="115" ry="25" fill="none" stroke="#a3ff3b" stroke-width="0.5" opacity="0.1" stroke-dasharray="8 6" transform="rotate(-15 150 145)"/>
         
         <!-- Antenne -->
-        <line x1="60" y1="18" x2="60" y2="6" stroke="#a3ff3b" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
-        <circle cx="60" cy="4" r="5" fill="url(#headGrad)" filter="url(#glow)"/>
-        <circle cx="60" cy="4" r="2" fill="#fff" opacity="0.8"/>
+        <line x1="150" y1="38" x2="150" y2="10" stroke="#a3ff3b" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+        <circle cx="150" cy="6" r="10" fill="url(#headGrad)" filter="url(#glowStrong)"/>
+        <circle cx="150" cy="6" r="5" fill="#fff" opacity="0.6"/>
+        <circle cx="150" cy="6" r="2.5" fill="#fff"/>
         
         <!-- Corps -->
-        <rect x="28" y="48" width="64" height="50" rx="18" fill="url(#bodyGrad)" filter="url(#glow)"/>
+        <rect x="70" y="115" width="160" height="120" rx="40" fill="url(#bodyGrad)" filter="url(#glow)"/>
         
-        <!-- Détails corps - lignes néon -->
-        <line x1="38" y1="58" x2="82" y2="58" stroke="#080808" stroke-width="1.5" opacity="0.4"/>
-        <line x1="38" y1="65" x2="82" y2="65" stroke="#080808" stroke-width="1.5" opacity="0.4"/>
-        <line x1="38" y1="72" x2="82" y2="72" stroke="#080808" stroke-width="1.5" opacity="0.4"/>
+        <!-- Épaules -->
+        <rect x="50" y="125" width="40" height="35" rx="15" fill="url(#bodyGrad)"/>
+        <rect x="210" y="125" width="40" height="35" rx="15" fill="url(#bodyGrad)"/>
+        
+        <!-- Détails torse -->
+        <line x1="100" y1="145" x2="200" y2="145" stroke="#080808" stroke-width="2" opacity="0.3"/>
+        <line x1="100" y1="165" x2="200" y2="165" stroke="#080808" stroke-width="2" opacity="0.3"/>
+        <line x1="100" y1="185" x2="200" y2="185" stroke="#080808" stroke-width="2" opacity="0.3"/>
+        
+        <!-- Plaque centrale -->
+        <rect x="115" y="150" width="70" height="45" rx="10" fill="#080808" opacity="0.4"/>
+        <rect x="120" y="155" width="60" height="35" rx="8" fill="none" stroke="#a3ff3b" stroke-width="1" opacity="0.5"/>
         
         <!-- Cœur lumineux -->
-        <circle cx="60" cy="68" r="8" fill="#080808" opacity="0.5"/>
-        <circle cx="60" cy="68" r="4" fill="#a3ff3b" filter="url(#glow)">
-            <animate attributeName="r" values="3;5;3" dur="1.5s" repeatCount="indefinite"/>
-            <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite"/>
+        <circle cx="150" cy="172" r="12" fill="url(#heartGrad)" filter="url(#glowStrong)">
+            <animate attributeName="r" values="10;14;10" dur="1.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.7;1;0.7" dur="1.5s" repeatCount="indefinite"/>
         </circle>
+        <circle cx="150" cy="172" r="5" fill="#fff" opacity="0.5"/>
         
         <!-- Tête -->
-        <rect x="30" y="22" width="60" height="34" rx="16" fill="url(#headGrad)" filter="url(#glow)"/>
+        <rect x="80" y="45" width="140" height="80" rx="35" fill="url(#headGrad)" filter="url(#glow)"/>
+        
+        <!-- Oreilles latérales -->
+        <rect x="60" y="70" width="22" height="30" rx="8" fill="url(#bodyGrad)"/>
+        <rect x="218" y="70" width="22" height="30" rx="8" fill="url(#bodyGrad)"/>
         
         <!-- Visière -->
-        <rect x="35" y="30" width="50" height="18" rx="9" fill="#080808" opacity="0.7"/>
+        <rect x="95" y="60" width="110" height="50" rx="20" fill="url(#visorGrad)"/>
+        <rect x="98" y="63" width="104" height="44" rx="18" fill="none" stroke="#a3ff3b" stroke-width="1" opacity="0.4"/>
         
         <!-- Yeux -->
-        <circle cx="48" cy="38" r="5" fill="#a3ff3b" filter="url(#glow)"/>
-        <circle cx="48" cy="38" r="2" fill="#fff" opacity="0.9"/>
-        <circle cx="72" cy="38" r="5" fill="#a3ff3b" filter="url(#glow)"/>
-        <circle cx="72" cy="38" r="2" fill="#fff" opacity="0.9"/>
+        <g class="robot-eye">
+            <circle cx="125" cy="82" r="12" fill="#a3ff3b" filter="url(#glowStrong)"/>
+            <circle cx="125" cy="82" r="6" fill="#fff" opacity="0.8"/>
+            <circle cx="127" cy="80" r="2.5" fill="#fff"/>
+        </g>
+        <g class="robot-eye">
+            <circle cx="175" cy="82" r="12" fill="#a3ff3b" filter="url(#glowStrong)"/>
+            <circle cx="175" cy="82" r="6" fill="#fff" opacity="0.8"/>
+            <circle cx="177" cy="80" r="2.5" fill="#fff"/>
+        </g>
         
         <!-- Sourire -->
-        <path d="M47 45 Q60 50 73 45" stroke="#a3ff3b" stroke-width="1.5" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+        <path d="M120 95 Q150 108 180 95" stroke="#a3ff3b" stroke-width="2" fill="none" stroke-linecap="round" filter="url(#glow)"/>
         
         <!-- Bras gauche (fait coucou) -->
-        <g class="robot-arm">
-            <rect x="16" y="52" width="12" height="6" rx="3" fill="url(#bodyGrad)" filter="url(#glow)"/>
-            <rect x="18" y="40" width="6" height="14" rx="3" fill="url(#headGrad)"/>
-            <circle cx="21" cy="38" r="7" fill="url(#headGrad)" filter="url(#glow)"/>
-            <circle cx="21" cy="38" r="3" fill="#a3ff3b"/>
+        <g class="robot-arm-group">
+            <rect x="35" y="130" width="22" height="12" rx="6" fill="url(#bodyGrad)" filter="url(#glow)"/>
+            <rect x="40" y="88" width="12" height="45" rx="6" fill="url(#headGrad)"/>
+            <circle cx="46" cy="82" r="16" fill="url(#headGrad)" filter="url(#glow)"/>
+            <circle cx="46" cy="82" r="8" fill="#a3ff3b"/>
+            <circle cx="42" cy="78" r="3" fill="#fff" opacity="0.5"/>
+            <rect x="34" y="68" width="6" height="12" rx="3" fill="url(#headGrad)"/>
+            <rect x="44" y="65" width="6" height="12" rx="3" fill="url(#headGrad)"/>
+            <rect x="54" y="70" width="6" height="12" rx="3" fill="url(#headGrad)"/>
         </g>
         
         <!-- Bras droit -->
-        <rect x="92" y="56" width="12" height="6" rx="3" fill="url(#bodyGrad)" filter="url(#glow)"/>
-        <rect x="96" y="48" width="6" height="10" rx="3" fill="url(#headGrad)"/>
+        <rect x="243" y="140" width="22" height="12" rx="6" fill="url(#bodyGrad)" filter="url(#glow)"/>
+        <rect x="248" y="110" width="12" height="35" rx="6" fill="url(#headGrad)"/>
+        <circle cx="254" cy="105" r="12" fill="url(#headGrad)" filter="url(#glow)"/>
         
         <!-- Jambes -->
-        <rect x="36" y="90" width="14" height="18" rx="7" fill="url(#bodyGrad)" filter="url(#glow)"/>
-        <rect x="70" y="90" width="14" height="18" rx="7" fill="url(#bodyGrad)" filter="url(#glow)"/>
+        <rect x="100" y="225" width="35" height="40" rx="15" fill="url(#bodyGrad)" filter="url(#glow)"/>
+        <rect x="165" y="225" width="35" height="40" rx="15" fill="url(#bodyGrad)" filter="url(#glow)"/>
         
         <!-- Pieds -->
-        <rect x="32" y="104" width="20" height="8" rx="4" fill="#080808" opacity="0.6"/>
-        <rect x="68" y="104" width="20" height="8" rx="4" fill="#080808" opacity="0.6"/>
+        <rect x="88" y="258" width="50" height="18" rx="9" fill="#080808" opacity="0.7"/>
+        <rect x="162" y="258" width="50" height="18" rx="9" fill="#080808" opacity="0.7"/>
+        <rect x="88" y="260" width="50" height="2" rx="1" fill="#a3ff3b" opacity="0.4"/>
+        <rect x="162" y="260" width="50" height="2" rx="1" fill="#a3ff3b" opacity="0.4"/>
     </svg>
 </div>
 
@@ -808,7 +852,6 @@
 </div>
 
 <script>
-// Compteur
 function showCompteur() {
     var password = prompt("Mot de passe pour voir les statistiques :");
     if (password === "eclipse2024") {
