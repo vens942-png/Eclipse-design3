@@ -25,7 +25,6 @@
         .screen { display: none; height: 100vh; flex-direction: column; }
         .screen.active { display: flex; }
 
-        /* HOME SCREEN */
         #ticker-bar {
             background: #d4af37; color: #000; padding: 6px 0; overflow: hidden;
             white-space: nowrap; font-weight: 700; font-size: 0.7rem;
@@ -79,7 +78,6 @@
         .bottom-btn.main { width:54px; height:54px; background:var(--accent); color:#fff; border:none; font-size:1.4rem; }
         .bottom-btn.gold { border-color:var(--gold); color:var(--gold); }
 
-        /* EDITOR SCREEN */
         #editor-topbar {
             height:50px; background:var(--panel); border-bottom:1px solid var(--border);
             display:flex; align-items:center; padding:0 12px; gap:8px; flex-shrink:0; z-index:100;
@@ -182,7 +180,6 @@
         }
         .prop-btn:hover,.prop-btn.active { background:rgba(91,106,240,0.15); border-color:var(--accent); color:var(--accent); }
 
-        /* POPUPS */
         .popup-overlay {
             position:fixed; top:0; left:0; width:100%; height:100%;
             background:rgba(0,0,0,0.8); z-index:500; display:none;
@@ -216,7 +213,6 @@
 </head>
 <body>
 
-<!-- ═══════════ HOME SCREEN ═══════════ -->
 <div id="home-screen" class="screen active">
     <div id="ticker-bar"><span class="ticker-text">🎨 Laissez place à votre créativité, libérez le potentiel &nbsp;&nbsp;&nbsp; ✨ Laissez place à votre créativité, libérez le potentiel</span></div>
     <div id="home-header">
@@ -224,7 +220,7 @@
         <div class="app-name">RC <span>Logo Maker</span></div>
         <div class="app-subtitle">Créez votre identité en un clin d'œil</div>
     </div>
-    <a id="download-apk" href="app-release.apk"><i class="fa-solid fa-download"></i> Télécharger l'application (APK)</a>
+    <a id="download-apk" href="../app-release.apk"><i class="fa-solid fa-download"></i> Télécharger l'application (APK)</a>
     <div id="home-search"><i class="fa-solid fa-magnifying-glass"></i><input type="text" placeholder="Rechercher un style de logo..."><i class="fa-solid fa-camera"></i></div>
     <div id="home-content">
         <div class="section-title"><i class="fa-solid fa-fire"></i> Templates tendance</div>
@@ -239,7 +235,6 @@
     </div>
 </div>
 
-<!-- ═══════════ EDITOR SCREEN ═══════════ -->
 <div id="editor-screen" class="screen">
     <div id="editor-topbar">
         <i class="fa-solid fa-arrow-left tb-btn" onclick="goHome()" style="border:none;font-size:16px;cursor:pointer;color:var(--text2);padding:6px"></i>
@@ -300,7 +295,6 @@
     </div>
 </div>
 
-<!-- Popups -->
 <div class="popup-overlay" id="dim-popup">
     <div class="popup"><button class="close-btn" onclick="closeDimensions()">✕</button><h3>📐 Choisir une dimension</h3><div class="dim-list" id="dim-list"></div></div>
 </div>
@@ -315,7 +309,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// ═══════════════ STATE ═══════════════
 const canvas = document.getElementById('main-canvas');
 const ctx = canvas.getContext('2d');
 const selCanvas = document.getElementById('sel-canvas');
@@ -329,7 +322,6 @@ const COLORS = ['#ffffff','#000000','#ef4444','#f97316','#f59e0b','#84cc16','#22
 const ICONS = ['★','♦','♠','♥','♣','◆','▲','▼','●','■','⬟','⬡','⌂','✈','⚡','✦','❋','✿','❀','✺','☀','☁','❄','♺','⚙','✉','☎','⚑','♫','✂'];
 const SIZES = [[500,500,'Carré'],[600,600,'Logo'],[800,400,'Banner'],[400,800,'Portrait'],[1024,512,'Twitter'],[800,800,'Instagram']];
 
-// ═══════════════ ELEMENTS ═══════════════
 function mkId(){return++lastId}
 function makeRect(x,y,w,h){return{id:mkId(),type:'rect',x,y,w,h,fill:'#5b6af0',stroke:'none',strokeW:0,rx:0,opacity:1,rotation:0,visible:true,shadow:false,shadowX:3,shadowY:3,shadowB:8,shadowC:'#00000066',gradient:false,gradientFrom:'#5b6af0',gradientTo:'#7c4af0',gradientAngle:135}}
 function makeCircle(x,y,r){return{id:mkId(),type:'circle',x,y,r,fill:'#7c4af0',stroke:'none',strokeW:0,opacity:1,rotation:0,visible:true,shadow:false,shadowX:3,shadowY:3,shadowB:8,shadowC:'#00000066',gradient:false,gradientFrom:'#7c4af0',gradientTo:'#a855f7',gradientAngle:135}}
@@ -340,12 +332,10 @@ function makeIcon(x,y,c,s){return{id:mkId(),type:'icon',x,y,char:c,size:s,fill:'
 function makePolygon(x,y,s,si){return{id:mkId(),type:'polygon',x,y,size:s,sides:si,fill:'#3b82f6',stroke:'none',strokeW:0,opacity:1,rotation:0,visible:true}}
 function makeStar(x,y,o,i,p){return{id:mkId(),type:'star',x,y,outerR:o,innerR:i,points:p,fill:'#f59e0b',stroke:'none',strokeW:0,opacity:1,rotation:0,visible:true}}
 
-// ═══════════════ HISTORY ═══════════════
 function saveHistory(){history=history.slice(0,historyIndex+1);history.push(JSON.stringify(elements));historyIndex++;if(history.length>50){history.shift();historyIndex--}}
 function undo(){if(historyIndex<=0)return;historyIndex--;elements=JSON.parse(history[historyIndex]);selectedId=null;render();renderProps();renderLayers()}
 function redo(){if(historyIndex>=history.length-1)return;historyIndex++;elements=JSON.parse(history[historyIndex]);selectedId=null;render();renderProps();renderLayers()}
 
-// ═══════════════ RENDER ═══════════════
 function render(){
     ctx.clearRect(0,0,canvasW,canvasH);ctx.fillStyle=canvasBg;ctx.fillRect(0,0,canvasW,canvasH);
     elements.filter(e=>e.visible!==false).forEach(e=>drawElement(ctx,e));
@@ -404,7 +394,6 @@ function getBB(el){
 }
 function hitTest(el,px,py){const bb=getBB(el);if(!bb)return false;return px>=bb.x&&px<=bb.x+bb.w&&py>=bb.y&&py<=bb.y+bb.h}
 
-// ═══════════════ MOUSE ═══════════════
 function getPos(e){const r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)/zoom,y:(e.clientY-r.top)/zoom}}
 canvas.addEventListener('mousedown',e=>{if(e.button===2)return;const p=getPos(e);
     if(selectedId){const el=elements.find(e2=>e2.id===selectedId);if(el){const bb=getBB(el);if(bb){const hx=bb.x-4,hy=bb.y-4,hw=bb.w+8,hh=bb.h+8;
@@ -426,7 +415,6 @@ canvas.addEventListener('mousemove',e=>{if(!dragState&&!resizeState)return;const
 canvas.addEventListener('mouseup',()=>{if(dragState||resizeState)saveHistory();isDragging=false;dragState=null;resizeState=null;renderProps()});
 canvas.addEventListener('dblclick',e=>{const p=getPos(e);let hit=null;for(let i=elements.length-1;i>=0;i--){if(elements[i].visible!==false&&hitTest(elements[i],p.x,p.y)){hit=elements[i];break}}if(hit&&hit.type==='text'){const t=prompt('Modifier le texte:',hit.text);if(t!==null){hit.text=t;saveHistory();render();renderProps()}}});
 
-// ═══════════════ KEYBOARD ═══════════════
 document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
     if(e.key==='Delete'||e.key==='Backspace')deleteSelected();
     if(e.ctrlKey&&e.key==='z'){e.preventDefault();undo()}if(e.ctrlKey&&e.key==='y'){e.preventDefault();redo()}
@@ -434,7 +422,6 @@ document.addEventListener('keydown',e=>{if(e.target.tagName==='INPUT'||e.target.
     if((e.key==='ArrowLeft'||e.key==='ArrowRight'||e.key==='ArrowUp'||e.key==='ArrowDown')&&selectedId){e.preventDefault();const el=elements.find(e2=>e2.id===selectedId);if(!el)return;const s=e.shiftKey?10:1,dx=e.key==='ArrowLeft'?-s:e.key==='ArrowRight'?s:0,dy=e.key==='ArrowUp'?-s:e.key==='ArrowDown'?s:0;if(el.type==='line'){el.x1+=dx;el.y1+=dy;el.x2+=dx;el.y2+=dy}else{el.x+=dx;el.y+=dy}render();renderProps()}
 });
 
-// ═══════════════ ACTIONS ═══════════════
 function addShape(type){let el;const cx=canvasW/2,cy=canvasH/2;
     if(type==='rect')el=makeRect(cx-60,cy-40,120,80);else if(type==='circle')el=makeCircle(cx,cy,60);
     else if(type==='triangle')el=makeTriangle(cx,cy,110);else if(type==='pentagon')el=makePolygon(cx,cy,60,5);
@@ -449,12 +436,10 @@ function deleteSelected(){if(!selectedId)return;elements=elements.filter(e=>e.id
 function duplicateSelected(){if(!selectedId)return;const el=elements.find(e=>e.id===selectedId);if(!el)return;const copy=JSON.parse(JSON.stringify(el));copy.id=mkId();copy.x=(copy.x||0)+20;copy.y=(copy.y||0)+20;if(copy.x1!==undefined){copy.x1+=20;copy.y1+=20;copy.x2+=20;copy.y2+=20}elements.push(copy);selectedId=copy.id;saveHistory();render();renderProps();renderLayers();toast('Dupliqué')}
 function clearCanvas(){if(!confirm('Vider le canevas ?'))return;elements=[];selectedId=null;saveHistory();render();renderProps();renderLayers()}
 
-// ═══════════════ ZOOM ═══════════════
 function changeZoom(d){zoom=Math.max(0.1,Math.min(4,zoom+d));document.getElementById('canvas-wrapper').style.transform=`scale(${zoom})`;document.getElementById('zoom-label').textContent=Math.round(zoom*100)+'%'}
 function fitToScreen(){const a=document.getElementById('canvas-area');zoom=Math.min((a.clientWidth-60)/canvasW,(a.clientHeight-60)/canvasH,2);document.getElementById('canvas-wrapper').style.transform=`scale(${zoom})`;document.getElementById('zoom-label').textContent=Math.round(zoom*100)+'%'}
 document.getElementById('canvas-area').addEventListener('wheel',e=>{if(e.ctrlKey){e.preventDefault();changeZoom(e.deltaY<0?0.05:-0.05)}},{passive:false});
 
-// ═══════════════ PANELS ═══════════════
 function togglePanel(name){
     const fly=document.getElementById('panel-flyout');
     if(currentPanel===name){fly.classList.remove('open');currentPanel=null}else{currentPanel=name;fly.classList.add('open');renderPanel(name)}
@@ -471,7 +456,6 @@ function applyColor(cl){if(!selectedId){setCanvasBg(cl);return}const el=elements
 function setCanvasBg(cl){canvasBg=cl;render();saveHistory()}
 function handleUpload(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{const img=new Image();img.src=ev.target.result;img.onload=()=>{const el={id:mkId(),type:'image',x:canvasW/2-img.width/4,y:canvasH/2-img.height/4,w:img.width/2,h:img.height/2,img,opacity:1,rotation:0,visible:true};elements.push(el);selectedId=el.id;saveHistory();render();renderProps();renderLayers();toast('Image importée')}};r.readAsDataURL(f)}
 
-// ═══════════════ PROPS ═══════════════
 function renderProps(){
     const c=document.getElementById('tab-props');
     if(!selectedId){c.innerHTML=`<div style="text-align:center;color:var(--text3);padding:20px">Sélectionnez un élément</div>`;return}
@@ -492,7 +476,6 @@ function renderProps(){
 function updateProp(k,v){if(!selectedId)return;const el=elements.find(e=>e.id===selectedId);if(!el)return;el[k]=v;render();clearTimeout(window._pt);window._pt=setTimeout(()=>saveHistory(),500)}
 function toggleProp(k){if(!selectedId)return;const el=elements.find(e=>e.id===selectedId);if(!el)return;el[k]=!el[k];saveHistory();render();renderProps()}
 
-// ═══════════════ LAYERS ═══════════════
 function renderLayers(){
     const c=document.getElementById('tab-layers');
     if(elements.length===0){c.innerHTML='<div style="text-align:center;color:var(--text3);padding:20px">Aucun calque</div>';return}
@@ -501,7 +484,6 @@ function renderLayers(){
 function selectLayer(id){selectedId=id;render();renderProps();renderLayers()}
 function deleteLayer(id){elements=elements.filter(e=>e.id!==id);if(selectedId===id)selectedId=null;saveHistory();render();renderProps();renderLayers()}
 
-// ═══════════════ CANVAS ═══════════════
 function renderCanvasSettings(){
     const c=document.getElementById('tab-canvas');
     c.innerHTML=`<div class="prop-group"><div class="prop-label">Taille du canevas</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">${SIZES.map(s=>`<div class="prop-btn ${canvasW===s[0]&&canvasH===s[1]?'active':''}" onclick="resizeCanvas(${s[0]},${s[1]})">${s[2]}<br><small style="color:var(--text3)">${s[0]}×${s[1]}</small></div>`).join('')}</div><div class="prop-row"><input class="prop-input" id="cw-inp" type="number" value="${canvasW}" min="100" max="2000"><input class="prop-input" id="ch-inp" type="number" value="${canvasH}" min="100" max="2000"><button class="prop-btn" onclick="resizeCanvas(+document.getElementById('cw-inp').value,+document.getElementById('ch-inp').value)">OK</button></div></div><div class="prop-group"><div class="prop-label">Fond</div><div class="prop-row"><input type="color" class="prop-input" value="${canvasBg}" onchange="setCanvasBg(this.value);renderCanvasSettings()" style="width:40px;height:28px"><input type="text" class="prop-input" value="${canvasBg}" onchange="setCanvasBg(this.value);renderCanvasSettings()"></div></div><div class="prop-group"><div class="prop-label">Exporter</div><div class="btn-row"><button class="prop-btn" onclick="exportPNG()">PNG</button><button class="prop-btn" onclick="exportPNG2x()">PNG @2x</button><button class="prop-btn" onclick="exportSVG()">SVG</button><button class="prop-btn" onclick="exportJSON()">JSON</button></div></div>`;
@@ -509,13 +491,11 @@ function renderCanvasSettings(){
 function resizeCanvas(w,h){canvasW=w;canvasH=h;canvas.width=w;canvas.height=h;selCanvas.width=w;selCanvas.height=h;render();renderCanvasSettings();fitToScreen();toast(`Canevas: ${w}×${h}px`)}
 function switchTab(name){activeTab=name;document.querySelectorAll('.rs-tab').forEach(t=>t.classList.remove('active'));document.getElementById('tab-'+name)?.classList.add('active');document.querySelectorAll('.tab-content').forEach(t=>{t.classList.remove('active');t.style.display='none'});const tc=document.getElementById('tab-'+name);if(tc){tc.classList.add('active');tc.style.display='block'}if(name==='layers')renderLayers();if(name==='canvas')renderCanvasSettings();if(name==='props')renderProps()}
 
-// ═══════════════ EXPORT ═══════════════
 function exportPNG(){selectedId=null;render();const a=document.createElement('a');a.download=(document.getElementById('filename-input').value||'logo')+'.png';a.href=canvas.toDataURL('image/png');a.click();toast('PNG exporté')}
 function exportPNG2x(){selectedId=null;const c2=document.createElement('canvas');c2.width=canvasW*2;c2.height=canvasH*2;const c2ctx=c2.getContext('2d');c2ctx.scale(2,2);c2ctx.fillStyle=canvasBg;c2ctx.fillRect(0,0,canvasW,canvasH);elements.filter(e=>e.visible!==false).forEach(e=>drawElement(c2ctx,e));const a=document.createElement('a');a.download=(document.getElementById('filename-input').value||'logo')+'@2x.png';a.href=c2.toDataURL('image/png');a.click();toast('PNG @2x exporté')}
 function exportSVG(){selectedId=null;render();let s=`<svg xmlns="http://www.w3.org/2000/svg" width="${canvasW}" height="${canvasH}"><rect width="${canvasW}" height="${canvasH}" fill="${canvasBg}"/>`;elements.filter(e=>e.visible!==false).forEach(e=>{if(e.type==='rect')s+=`<rect x="${e.x}" y="${e.y}" width="${e.w}" height="${e.h}" rx="${e.rx||0}" fill="${e.fill}" opacity="${e.opacity??1}"/>`;else if(e.type==='circle')s+=`<circle cx="${e.x}" cy="${e.y}" r="${e.r}" fill="${e.fill}" opacity="${e.opacity??1}"/>`;else if(e.type==='text')s+=`<text x="${e.x}" y="${e.y+e.size}" font-family="${e.font}" font-size="${e.size}" font-weight="${e.weight||400}" fill="${e.fill}" opacity="${e.opacity??1}">${e.text}</text>`});s+='</svg>';const b=new Blob([s],{type:'image/svg+xml'});const a=document.createElement('a');a.download=(document.getElementById('filename-input').value||'logo')+'.svg';a.href=URL.createObjectURL(b);a.click();toast('SVG exporté')}
 function exportJSON(){const d=JSON.stringify({canvasW,canvasH,canvasBg,elements},null,2);const b=new Blob([d],{type:'application/json'});const a=document.createElement('a');a.download=(document.getElementById('filename-input').value||'logo')+'.json';a.href=URL.createObjectURL(b);a.click();toast('JSON exporté')}
 
-// ═══════════════ SCREENS ═══════════════
 function goHome(){document.getElementById('editor-screen').classList.remove('active');document.getElementById('home-screen').classList.add('active')}
 function openEditor(){document.getElementById('home-screen').classList.remove('active');document.getElementById('editor-screen').classList.add('active');fitToScreen()}
 function showDimensions(){const c=document.getElementById('dim-list');c.innerHTML=SIZES.map(s=>`<div class="dim-item" onclick="resizeCanvas(${s[0]},${s[1]});openEditor();closeDimensions()">${s[2]}<br><small>${s[0]}×${s[1]}</small></div>`).join('')+'<div class="dim-item" onclick="openEditor();closeDimensions()">📥 Importer<br><small>mon fond</small></div>';document.getElementById('dim-popup').classList.add('active')}
@@ -525,7 +505,6 @@ function closeMenu(){document.getElementById('menu-popup').classList.remove('act
 function setTool(t){document.querySelectorAll('.tool-btn').forEach(b=>b.classList.remove('active'))}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
 
-// ═══════════════ HOME TEMPLATES ═══════════════
 function renderHomeTemplates(){
     const names=['Minimal','Cercle','Bold','Tech','Luxe','Néon','Nature','Vintage','Monogram','Géométrique','Artisanal','Blason'];
     const previews=['<svg viewBox="0 0 80 30" width="50"><rect x="5" y="10" width="70" height="10" rx="3" fill="#1a1a2e"/><text x="40" y="19" text-anchor="middle" font-size="7" font-family="Arial" font-weight="900" fill="#5b6af0">MARQUE</text></svg>',
@@ -544,7 +523,6 @@ function renderHomeTemplates(){
     grid.innerHTML=names.map((n,i)=>`<div class="tpl-card" onclick="openEditor()"><div class="preview" style="background:${i%2===0?'#fff':'#1a1a2e'}">${previews[i]}</div><div class="tpl-name">${n}</div></div>`).join('');
 }
 
-// ═══════════════ INIT ═══════════════
 function init(){
     canvasBg='#0d0d0f';
     const bg=makeRect(150,150,300,300);bg.rx=20;bg.fill='#5b6af0';bg.gradient=true;bg.gradientFrom='#5b6af0';bg.gradientTo='#7c4af0';bg.shadow=true;bg.shadowX=0;bg.shadowY=8;bg.shadowB=24;
