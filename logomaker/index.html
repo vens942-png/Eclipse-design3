@@ -22,11 +22,10 @@
             font-family: 'Inter', sans-serif; height: 100vh; overflow: hidden;
             user-select: none; -webkit-user-select: none;
         }
-        /* ÉCRANS */
         .screen { display: none; height: 100vh; flex-direction: column; }
         .screen.active { display: flex; }
 
-        /* === HOME SCREEN === */
+        /* HOME SCREEN */
         #home-top { padding: 16px 20px 0; }
         #home-top-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
         #home-top-bar .avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; }
@@ -47,11 +46,8 @@
         .tpl-card .tpl-name { padding: 8px 10px; font-size: 0.7rem; font-weight: 600; color: var(--text2); text-align: center; }
         .create-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; padding: 14px; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; cursor: pointer; margin: 16px 0; }
 
-        /* === EDITOR SCREEN === */
-        #editor-sidebar {
-            width: 240px; background: var(--panel); border-right: 1px solid var(--border);
-            display: flex; flex-direction: column; flex-shrink: 0;
-        }
+        /* EDITOR SCREEN */
+        #editor-sidebar { width: 240px; background: var(--panel); border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
         #editor-sidebar .logo-area { padding: 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; cursor: pointer; }
         #editor-sidebar .logo-area img { width: 30px; height: 30px; border-radius: 6px; }
         #editor-sidebar .logo-area span { font-weight: 700; font-size: 0.85rem; }
@@ -67,25 +63,15 @@
         #editor-topbar .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; }
         #canvas-container { flex:1; display: flex; align-items: center; justify-content: center; background: #0c0c14; padding: 20px; overflow: auto; background-image: radial-gradient(circle, #1a1a24 1px, transparent 1px); background-size: 18px 18px; }
         #canvas-wrap { box-shadow: var(--shadow); border-radius: 4px; overflow: hidden; }
-        
-        /* Context toolbar */
-        #context-bar {
-            display: none; position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
-            background: var(--panel); border: 1px solid var(--border); border-radius: 25px;
-            padding: 6px 12px; gap: 4px; z-index: 500; box-shadow: var(--shadow);
-        }
+        #context-bar { display: none; position: fixed; top: 60px; left: 50%; transform: translateX(-50%); background: var(--panel); border: 1px solid var(--border); border-radius: 25px; padding: 6px 12px; gap: 4px; z-index: 500; box-shadow: var(--shadow); }
         #context-bar.active { display: flex; }
         #context-bar button { width: 34px; height: 34px; border-radius: 50%; border: none; background: transparent; color: var(--text2); cursor: pointer; font-size: 0.8rem; transition: all 0.15s; }
         #context-bar button:hover { background: var(--panel2); color: var(--text); }
         #context-bar button.danger:hover { background: rgba(239,68,68,0.15); color: var(--danger); }
         #context-bar .sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; align-self: center; }
-
-        /* Bottom bar */
         #editor-bottom { height: 52px; background: var(--panel); border-top: 1px solid var(--border); display: flex; align-items: center; padding: 0 12px; gap: 6px; overflow-x: auto; }
         #editor-bottom .tpl-btn { flex: 0 0 auto; width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--panel2); border: 1px solid transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--text2); transition: all 0.15s; }
         #editor-bottom .tpl-btn:hover { border-color: var(--accent); color: var(--text); }
-
-        /* Toast */
         #toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 10px 22px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
         #toast.show { opacity: 1; }
 
@@ -99,7 +85,7 @@
 </head>
 <body>
 
-<!-- ========== HOME SCREEN ========== -->
+<!-- HOME SCREEN -->
 <div id="home-screen" class="screen active">
     <div id="home-top">
         <div id="home-top-bar">
@@ -140,10 +126,9 @@
     </div>
 </div>
 
-<!-- ========== EDITOR SCREEN ========== -->
+<!-- EDITOR SCREEN -->
 <div id="editor-screen" class="screen">
     <div style="display:flex; flex:1; overflow:hidden;">
-        <!-- Sidebar -->
         <div id="editor-sidebar">
             <div class="logo-area" onclick="goHome()">
                 <img src="https://i.postimg.cc/MH5vhHcM/Picsart-26-05-29-19-07-33-506.jpg" alt="RC"> <span>RC Maker</span>
@@ -160,7 +145,6 @@
                 <div class="nav-item" onclick="canvas.backgroundColor='transparent';canvas.renderAll();toast('🫥 Fond transparent')"><i class="fa-solid fa-eraser"></i> <span>Fond transparent</span></div>
             </div>
         </div>
-        <!-- Main -->
         <div id="editor-main">
             <div id="editor-topbar">
                 <i class="fa-solid fa-arrow-left back-btn" onclick="goHome()"></i>
@@ -174,7 +158,6 @@
                     <canvas id="logoCanvas" width="500" height="500"></canvas>
                 </div>
             </div>
-            <!-- Context bar -->
             <div id="context-bar">
                 <button onclick="changeColor()" title="Couleur">🎨</button>
                 <button onclick="duplicateObj()" title="Dupliquer">📋</button>
@@ -187,7 +170,6 @@
                 <span class="sep"></span>
                 <button class="danger" onclick="deleteSelected()" title="Supprimer">🗑️</button>
             </div>
-            <!-- Bottom bar -->
             <div id="editor-bottom">
                 <div class="tpl-btn" onclick="loadTemplate('minimal')">🔤</div>
                 <div class="tpl-btn" onclick="loadTemplate('circle')">⭕</div>
@@ -208,15 +190,9 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
 <script>
-    // === SCREENS ===
     function goHome() { document.getElementById('home-screen').classList.add('active'); document.getElementById('editor-screen').classList.remove('active'); }
-    function openEditor(tpl) {
-        document.getElementById('home-screen').classList.remove('active');
-        document.getElementById('editor-screen').classList.add('active');
-        if (tpl) loadTemplate(tpl);
-    }
+    function openEditor(tpl) { document.getElementById('home-screen').classList.remove('active'); document.getElementById('editor-screen').classList.add('active'); if (tpl) loadTemplate(tpl); }
 
-    // === CANVAS ===
     const canvas = new fabric.Canvas('logoCanvas', { backgroundColor: '#ffffff', width: 500, height: 500, preserveObjectStacking: true });
     let history = [], historyIndex = -1;
     function saveState() { history = history.slice(0, historyIndex + 1); history.push(JSON.stringify(canvas.toJSON())); historyIndex = history.length - 1; }
@@ -224,16 +200,13 @@
     function redo() { if (historyIndex < history.length - 1) { historyIndex++; canvas.loadFromJSON(JSON.parse(history[historyIndex]), canvas.renderAll.bind(canvas)); } }
     canvas.on('object:modified', saveState); canvas.on('object:added', saveState); saveState();
 
-    // === TOAST ===
     function toast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
 
-    // === CONTEXT BAR ===
     function showContext() { document.getElementById('context-bar').classList.add('active'); }
     function hideContext() { document.getElementById('context-bar').classList.remove('active'); }
     canvas.on('selection:created', showContext);
     canvas.on('selection:updated', showContext);
     canvas.on('selection:cleared', hideContext);
-    canvas.on('object:modified', () => { if (canvas.getActiveObject()) showContext(); });
 
     function duplicateObj() { const a = canvas.getActiveObject(); if (a) { a.clone(clone => { clone.set({ left: clone.left + 20, top: clone.top + 20 }); canvas.add(clone); canvas.setActiveObject(clone); saveState(); toast('📋 Dupliqué'); }); } }
     function bringForward() { const a = canvas.getActiveObject(); if (a) { canvas.bringForward(a); toast('⬆️ Avant'); } }
@@ -243,7 +216,6 @@
     function addOutline() { const a = canvas.getActiveObject(); if (a) { a.set('stroke', '#000'); a.set('strokeWidth', 3); canvas.renderAll(); saveState(); toast('✏️ Contour ajouté'); } }
     function changeOpacity() { const a = canvas.getActiveObject(); if (a) { const o = prompt('Opacité (0-1) :', '0.7'); if (o) { a.set('opacity', parseFloat(o)); canvas.renderAll(); saveState(); toast('💧 Opacité changée'); } } }
 
-    // === ELEMENTS ===
     function addText() { const t = new fabric.Textbox('Votre texte', { left: 120, top: 210, width: 260, fontSize: 42, fontFamily: 'Montserrat', fontWeight: '900', fill: '#1a1a2e', textAlign: 'center' }); canvas.add(t); canvas.setActiveObject(t); toast('✏️ Texte ajouté'); }
     function addCircle() { const c = new fabric.Circle({ left: 180, top: 180, radius: 80, fill: '#5b6af0' }); canvas.add(c); canvas.setActiveObject(c); toast('⭕ Cercle ajouté'); }
     function addRect() { const r = new fabric.Rect({ left: 150, top: 150, width: 200, height: 200, fill: '#5b6af0' }); canvas.add(r); canvas.setActiveObject(r); toast('⬛ Carré ajouté'); }
@@ -254,7 +226,6 @@
     function deleteSelected() { const a = canvas.getActiveObject(); if (a) { canvas.remove(a); hideContext(); toast('🗑️ Supprimé'); } }
     function downloadLogo() { const link = document.createElement('a'); link.download = 'logo-rc-maker.png'; link.href = canvas.toDataURL({ format: 'png', quality: 1 }); link.click(); toast('📥 Logo téléchargé !'); }
 
-    // === TEMPLATES ===
     function loadTemplate(type) {
         canvas.clear(); canvas.backgroundColor = '#ffffff';
         const c = '#5b6af0';
@@ -271,7 +242,6 @@
         toast('📄 Modèle chargé'); saveState();
     }
 
-    // === KEYBOARD ===
     document.addEventListener('keydown', e => {
         if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); deleteSelected(); }
         if ((e.ctrlKey || e.metaKey) && e.key === 'z') { e.preventDefault(); undo(); }
@@ -279,9 +249,7 @@
         if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); downloadLogo(); }
     });
 
-    // === SW ===
     if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
-
     toast('✨ RC Logo Maker prêt');
 </script>
 
