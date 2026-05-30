@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>RC Logo Maker – Regard Créatif</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0a0f">
+    <link rel="icon" href="https://i.postimg.cc/MH5vhHcM/Picsart-26-05-29-19-07-33-506.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600;700;900&family=Bebas+Neue&family=Righteous&family=Oswald:wght@500;700&family=Roboto:wght@400;900&family=League+Spartan:wght@600;800;900&family=Caveat:wght@700&family=Inter:wght@300;400;600;700;900&family=Pacifico&family=Abril+Fatface&family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0a0a0f; --panel: #12121a; --panel2: #16161f; --border: #1e1e2b;
+            --text: #e8e8ee; --text2: #8a8a9a; --accent: #5b6af0; --accent2: #7c4af0;
+            --accent-light: #818cf8; --radius: 14px; --radius-sm: 10px;
+            --shadow: 0 8px 32px rgba(0,0,0,0.5); --danger: #ef4444;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            background: var(--bg); color: var(--text);
+            font-family: 'Inter', sans-serif; height: 100vh; overflow: hidden;
+            user-select: none; -webkit-user-select: none;
+        }
+        /* ÉCRANS */
+        .screen { display: none; height: 100vh; flex-direction: column; }
+        .screen.active { display: flex; }
+
+        /* === HOME SCREEN === */
+        #home-top { padding: 16px 20px 0; }
+        #home-top-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+        #home-top-bar .avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; }
+        #home-top-bar .title { font-weight: 700; font-size: 1.1rem; flex:1; }
+        #home-top-bar .icon-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--panel2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text2); }
+        #search-box { display: flex; align-items: center; background: var(--panel2); border: 1px solid var(--border); border-radius: 25px; padding: 10px 16px; gap: 8px; }
+        #search-box input { flex:1; background: none; border: none; color: var(--text); font-size: 0.85rem; outline: none; }
+        #search-box i { color: var(--text2); }
+        #home-filters { display: flex; gap: 8px; padding: 12px 20px; overflow-x: auto; }
+        #home-filters button { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); background: var(--panel2); color: var(--text2); font-size: 0.75rem; cursor: pointer; white-space: nowrap; font-weight: 600; }
+        #home-filters button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        #home-content { flex:1; overflow-y: auto; padding: 0 20px 20px; }
+        .section-title { font-weight: 700; font-size: 0.9rem; margin: 16px 0 10px; color: var(--text); }
+        .template-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .tpl-card { background: var(--panel2); border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; cursor: pointer; transition: all 0.2s; }
+        .tpl-card:hover { border-color: var(--accent); }
+        .tpl-card .preview { height: 90px; display: flex; align-items: center; justify-content: center; font-size: 2rem; }
+        .tpl-card .tpl-name { padding: 8px 10px; font-size: 0.7rem; font-weight: 600; color: var(--text2); text-align: center; }
+        .create-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; padding: 14px; border-radius: var(--radius-sm); font-weight: 700; font-size: 0.9rem; cursor: pointer; margin: 16px 0; }
+
+        /* === EDITOR SCREEN === */
+        #editor-sidebar {
+            width: 240px; background: var(--panel); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; flex-shrink: 0;
+        }
+        #editor-sidebar .logo-area { padding: 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        #editor-sidebar .logo-area img { width: 30px; height: 30px; border-radius: 6px; }
+        #editor-sidebar .logo-area span { font-weight: 700; font-size: 0.85rem; }
+        #editor-nav { flex:1; padding: 8px; overflow-y: auto; }
+        #editor-nav .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius-sm); cursor: pointer; color: var(--text2); font-size: 0.8rem; font-weight: 500; transition: all 0.15s; }
+        #editor-nav .nav-item:hover { background: var(--panel2); color: var(--text); }
+        #editor-nav .nav-item i { width: 18px; text-align: center; }
+        #editor-main { flex:1; display: flex; flex-direction: column; }
+        #editor-topbar { height: 50px; background: var(--panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 16px; gap: 10px; }
+        #editor-topbar .back-btn { cursor: pointer; color: var(--text2); padding: 6px; }
+        #editor-topbar .proj-name { font-weight: 600; font-size: 0.85rem; flex:1; }
+        #editor-topbar .btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--panel2); color: var(--text); cursor: pointer; font-size: 0.75rem; font-weight: 600; }
+        #editor-topbar .btn.primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; border: none; }
+        #canvas-container { flex:1; display: flex; align-items: center; justify-content: center; background: #0c0c14; padding: 20px; overflow: auto; background-image: radial-gradient(circle, #1a1a24 1px, transparent 1px); background-size: 18px 18px; }
+        #canvas-wrap { box-shadow: var(--shadow); border-radius: 4px; overflow: hidden; }
+        
+        /* Context toolbar */
+        #context-bar {
+            display: none; position: fixed; top: 60px; left: 50%; transform: translateX(-50%);
+            background: var(--panel); border: 1px solid var(--border); border-radius: 25px;
+            padding: 6px 12px; gap: 4px; z-index: 500; box-shadow: var(--shadow);
+        }
+        #context-bar.active { display: flex; }
+        #context-bar button { width: 34px; height: 34px; border-radius: 50%; border: none; background: transparent; color: var(--text2); cursor: pointer; font-size: 0.8rem; transition: all 0.15s; }
+        #context-bar button:hover { background: var(--panel2); color: var(--text); }
+        #context-bar button.danger:hover { background: rgba(239,68,68,0.15); color: var(--danger); }
+        #context-bar .sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; align-self: center; }
+
+        /* Bottom bar */
+        #editor-bottom { height: 52px; background: var(--panel); border-top: 1px solid var(--border); display: flex; align-items: center; padding: 0 12px; gap: 6px; overflow-x: auto; }
+        #editor-bottom .tpl-btn { flex: 0 0 auto; width: 40px; height: 40px; border-radius: var(--radius-sm); background: var(--panel2); border: 1px solid transparent; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--text2); transition: all 0.15s; }
+        #editor-bottom .tpl-btn:hover { border-color: var(--accent); color: var(--text); }
+
+        /* Toast */
+        #toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 10px 22px; border-radius: 20px; font-weight: 600; font-size: 0.8rem; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+        #toast.show { opacity: 1; }
+
+        @media (max-width: 768px) {
+            #editor-sidebar { width: 55px; }
+            #editor-sidebar .logo-area span, #editor-nav .nav-item span { display: none; }
+            #editor-nav .nav-item { justify-content: center; }
+            #editor-topbar .proj-name { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ========== HOME SCREEN ========== -->
+<div id="home-screen" class="screen active">
+    <div id="home-top">
+        <div id="home-top-bar">
+            <div class="avatar">RC</div>
+            <span class="title">RC Logo Maker</span>
+            <i class="fa-regular fa-bell icon-btn"></i>
+        </div>
+        <div id="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="Rechercher un style de logo...">
+            <i class="fa-solid fa-camera"></i>
+        </div>
+    </div>
+    <div id="home-filters">
+        <button class="active">Tous</button>
+        <button>Minimaliste</button>
+        <button>Vintage</button>
+        <button>Tech</button>
+        <button>Luxe</button>
+        <button>Monogramme</button>
+    </div>
+    <div id="home-content">
+        <div class="create-btn" onclick="openEditor()">✨ Créer un logo</div>
+        <div class="section-title">📁 Derniers logos créés</div>
+        <div class="template-grid">
+            <div class="tpl-card" onclick="openEditor('minimal')"><div class="preview" style="background:#fff;">🔤</div><div class="tpl-name">Minimal</div></div>
+            <div class="tpl-card" onclick="openEditor('bold')"><div class="preview" style="background:#1a1a2e;">💪</div><div class="tpl-name">Bold</div></div>
+        </div>
+        <div class="section-title">🔥 Templates tendance</div>
+        <div class="template-grid">
+            <div class="tpl-card" onclick="openEditor('circle')"><div class="preview" style="background:#5b6af0;">⭕</div><div class="tpl-name">Cercle</div></div>
+            <div class="tpl-card" onclick="openEditor('tech')"><div class="preview" style="background:#0a0a1a;">🤖</div><div class="tpl-name">Tech</div></div>
+            <div class="tpl-card" onclick="openEditor('luxe')"><div class="preview" style="background:#faf5ef;">👑</div><div class="tpl-name">Luxe</div></div>
+            <div class="tpl-card" onclick="openEditor('neon')"><div class="preview" style="background:#0a0a0f;">💡</div><div class="tpl-name">Néon</div></div>
+            <div class="tpl-card" onclick="openEditor('nature')"><div class="preview" style="background:#ecfdf5;">🌿</div><div class="tpl-name">Nature</div></div>
+            <div class="tpl-card" onclick="openEditor('vintage')"><div class="preview" style="background:#fef3c7;">📻</div><div class="tpl-name">Vintage</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- ========== EDITOR SCREEN ========== -->
+<div id="editor-screen" class="screen">
+    <div style="display:flex; flex:1; overflow:hidden;">
+        <!-- Sidebar -->
+        <div id="editor-sidebar">
+            <div class="logo-area" onclick="goHome()">
+                <img src="https://i.postimg.cc/MH5vhHcM/Picsart-26-05-29-19-07-33-506.jpg" alt="RC"> <span>RC Maker</span>
+            </div>
+            <div id="editor-nav">
+                <div class="nav-item" onclick="toast('📄 10 modèles en bas')"><i class="fa-solid fa-swatchbook"></i> <span>Modèles</span></div>
+                <div class="nav-item" onclick="addText()"><i class="fa-solid fa-font"></i> <span>Texte</span></div>
+                <div class="nav-item" onclick="addCircle()"><i class="fa-regular fa-circle"></i> <span>Cercle</span></div>
+                <div class="nav-item" onclick="addRect()"><i class="fa-regular fa-square"></i> <span>Carré</span></div>
+                <div class="nav-item" onclick="addTriangle()"><i class="fa-solid fa-play"></i> <span>Triangle</span></div>
+                <div class="nav-item" onclick="addStar()"><i class="fa-regular fa-star"></i> <span>Étoile</span></div>
+                <div class="nav-item" onclick="addHeart()"><i class="fa-regular fa-heart"></i> <span>Cœur</span></div>
+                <div class="nav-item" onclick="addUpload()"><i class="fa-solid fa-upload"></i> <span>Upload</span></div>
+                <div class="nav-item" onclick="canvas.backgroundColor='transparent';canvas.renderAll();toast('🫥 Fond transparent')"><i class="fa-solid fa-eraser"></i> <span>Fond transparent</span></div>
+            </div>
+        </div>
+        <!-- Main -->
+        <div id="editor-main">
+            <div id="editor-topbar">
+                <i class="fa-solid fa-arrow-left back-btn" onclick="goHome()"></i>
+                <span class="proj-name">Mon logo</span>
+                <button class="btn" onclick="undo()">↩</button>
+                <button class="btn" onclick="redo()">↪</button>
+                <button class="btn primary" onclick="downloadLogo()">📥 Télécharger</button>
+            </div>
+            <div id="canvas-container">
+                <div id="canvas-wrap">
+                    <canvas id="logoCanvas" width="500" height="500"></canvas>
+                </div>
+            </div>
+            <!-- Context bar -->
+            <div id="context-bar">
+                <button onclick="changeColor()" title="Couleur">🎨</button>
+                <button onclick="duplicateObj()" title="Dupliquer">📋</button>
+                <button onclick="bringForward()" title="Avant">⬆️</button>
+                <button onclick="sendBackward()" title="Arrière">⬇️</button>
+                <span class="sep"></span>
+                <button onclick="addShadow()" title="Ombre">🕶️</button>
+                <button onclick="addOutline()" title="Contour">✏️</button>
+                <button onclick="changeOpacity()" title="Opacité">💧</button>
+                <span class="sep"></span>
+                <button class="danger" onclick="deleteSelected()" title="Supprimer">🗑️</button>
+            </div>
+            <!-- Bottom bar -->
+            <div id="editor-bottom">
+                <div class="tpl-btn" onclick="loadTemplate('minimal')">🔤</div>
+                <div class="tpl-btn" onclick="loadTemplate('circle')">⭕</div>
+                <div class="tpl-btn" onclick="loadTemplate('bold')">💪</div>
+                <div class="tpl-btn" onclick="loadTemplate('tech')">🤖</div>
+                <div class="tpl-btn" onclick="loadTemplate('luxe')">👑</div>
+                <div class="tpl-btn" onclick="loadTemplate('nature')">🌿</div>
+                <div class="tpl-btn" onclick="loadTemplate('monogram')">🅱️</div>
+                <div class="tpl-btn" onclick="loadTemplate('geometric')">🔷</div>
+                <div class="tpl-btn" onclick="loadTemplate('vintage')">📻</div>
+                <div class="tpl-btn" onclick="loadTemplate('neon')">💡</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+<script>
+    // === SCREENS ===
+    function goHome() { document.getElementById('home-screen').classList.add('active'); document.getElementById('editor-screen').classList.remove('active'); }
+    function openEditor(tpl) {
+        document.getElementById('home-screen').classList.remove('active');
+        document.getElementById('editor-screen').classList.add('active');
+        if (tpl) loadTemplate(tpl);
+    }
+
+    // === CANVAS ===
+    const canvas = new fabric.Canvas('logoCanvas', { backgroundColor: '#ffffff', width: 500, height: 500, preserveObjectStacking: true });
+    let history = [], historyIndex = -1;
+    function saveState() { history = history.slice(0, historyIndex + 1); history.push(JSON.stringify(canvas.toJSON())); historyIndex = history.length - 1; }
+    function undo() { if (historyIndex > 0) { historyIndex--; canvas.loadFromJSON(JSON.parse(history[historyIndex]), canvas.renderAll.bind(canvas)); } }
+    function redo() { if (historyIndex < history.length - 1) { historyIndex++; canvas.loadFromJSON(JSON.parse(history[historyIndex]), canvas.renderAll.bind(canvas)); } }
+    canvas.on('object:modified', saveState); canvas.on('object:added', saveState); saveState();
+
+    // === TOAST ===
+    function toast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800); }
+
+    // === CONTEXT BAR ===
+    function showContext() { document.getElementById('context-bar').classList.add('active'); }
+    function hideContext() { document.getElementById('context-bar').classList.remove('active'); }
+    canvas.on('selection:created', showContext);
+    canvas.on('selection:updated', showContext);
+    canvas.on('selection:cleared', hideContext);
+    canvas.on('object:modified', () => { if (canvas.getActiveObject()) showContext(); });
+
+    function duplicateObj() { const a = canvas.getActiveObject(); if (a) { a.clone(clone => { clone.set({ left: clone.left + 20, top: clone.top + 20 }); canvas.add(clone); canvas.setActiveObject(clone); saveState(); toast('📋 Dupliqué'); }); } }
+    function bringForward() { const a = canvas.getActiveObject(); if (a) { canvas.bringForward(a); toast('⬆️ Avant'); } }
+    function sendBackward() { const a = canvas.getActiveObject(); if (a) { canvas.sendBackwards(a); toast('⬇️ Arrière'); } }
+    function changeColor() { const a = canvas.getActiveObject(); if (a) { const c = prompt('Couleur (hex) :', '#5b6af0'); if (c) { a.set('fill', c); canvas.renderAll(); saveState(); toast('🎨 Couleur changée'); } } }
+    function addShadow() { const a = canvas.getActiveObject(); if (a) { a.set('shadow', new fabric.Shadow({ color: 'rgba(0,0,0,0.3)', blur: 15, offsetX: 5, offsetY: 5 })); canvas.renderAll(); saveState(); toast('🕶️ Ombre ajoutée'); } }
+    function addOutline() { const a = canvas.getActiveObject(); if (a) { a.set('stroke', '#000'); a.set('strokeWidth', 3); canvas.renderAll(); saveState(); toast('✏️ Contour ajouté'); } }
+    function changeOpacity() { const a = canvas.getActiveObject(); if (a) { const o = prompt('Opacité (0-1) :', '0.7'); if (o) { a.set('opacity', parseFloat(o)); canvas.renderAll(); saveState(); toast('💧 Opacité changée'); } } }
+
+    // === ELEMENTS ===
+    function addText() { const t = new fabric.Textbox('Votre texte', { left: 120, top: 210, width: 260, fontSize: 42, fontFamily: 'Montserrat', fontWeight: '900', fill: '#1a1a2e', textAlign: 'center' }); canvas.add(t); canvas.setActiveObject(t); toast('✏️ Texte ajouté'); }
+    function addCircle() { const c = new fabric.Circle({ left: 180, top: 180, radius: 80, fill: '#5b6af0' }); canvas.add(c); canvas.setActiveObject(c); toast('⭕ Cercle ajouté'); }
+    function addRect() { const r = new fabric.Rect({ left: 150, top: 150, width: 200, height: 200, fill: '#5b6af0' }); canvas.add(r); canvas.setActiveObject(r); toast('⬛ Carré ajouté'); }
+    function addTriangle() { const t = new fabric.Triangle({ left: 175, top: 140, width: 150, height: 200, fill: '#5b6af0' }); canvas.add(t); canvas.setActiveObject(t); toast('🔺 Triangle ajouté'); }
+    function addStar() { const pts = []; for (let i = 0; i < 10; i++) { const a = (i * Math.PI) / 5 - Math.PI / 2; const r = i % 2 === 0 ? 80 : 35; pts.push({ x: 250 + r * Math.cos(a), y: 250 + r * Math.sin(a) }); } const s = new fabric.Polygon(pts, { fill: '#f59e0b' }); canvas.add(s); canvas.setActiveObject(s); toast('⭐ Étoile ajoutée'); }
+    function addHeart() { const p = new fabric.Path('M250 350 C100 220 50 120 150 60 C200 30 250 80 250 120 C250 80 300 30 350 60 C450 120 400 220 250 350 Z', { fill: '#ef4444' }); canvas.add(p); canvas.setActiveObject(p); toast('❤️ Cœur ajouté'); }
+    function addUpload() { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'image/*'; inp.onchange = (e) => { const f = e.target.files[0]; const r = new FileReader(); r.onload = (ev) => { fabric.Image.fromURL(ev.target.result, (img) => { img.scaleToWidth(200); canvas.add(img); canvas.setActiveObject(img); saveState(); toast('📷 Image ajoutée'); }); }; r.readAsDataURL(f); }; inp.click(); }
+    function deleteSelected() { const a = canvas.getActiveObject(); if (a) { canvas.remove(a); hideContext(); toast('🗑️ Supprimé'); } }
+    function downloadLogo() { const link = document.createElement('a'); link.download = 'logo-rc-maker.png'; link.href = canvas.toDataURL({ format: 'png', quality: 1 }); link.click(); toast('📥 Logo téléchargé !'); }
+
+    // === TEMPLATES ===
+    function loadTemplate(type) {
+        canvas.clear(); canvas.backgroundColor = '#ffffff';
+        const c = '#5b6af0';
+        if (type === 'minimal') { const t = new fabric.Textbox('MARQUE', { left:80, top:200, width:340, fontSize:55, fontFamily:'Montserrat', fontWeight:'900', fill:'#1a1a2e', letterSpacing:6, textAlign:'center' }); const l = new fabric.Rect({ left:170, top:265, width:160, height:3, fill:c }); canvas.add(t); canvas.add(l); }
+        else if (type === 'circle') { const ci = new fabric.Circle({ left:165, top:165, radius:85, fill:c }); const ti = new fabric.Textbox('M', { left:170, top:195, width:160, fontSize:70, fontFamily:'Playfair Display', fontWeight:'900', fill:'#fff', textAlign:'center' }); canvas.add(ci); canvas.add(ti); }
+        else if (type === 'bold') { const r = new fabric.Rect({ left:110, top:150, width:280, height:200, fill:'#1a1a2e' }); const t = new fabric.Textbox('BOLD', { left:120, top:210, width:260, fontSize:55, fontFamily:'Bebas Neue', fill:c, textAlign:'center', letterSpacing:4 }); canvas.add(r); canvas.add(t); }
+        else if (type === 'tech') { const ci = new fabric.Circle({ left:190, top:190, radius:60, fill:'none', stroke:c, strokeWidth:5 }); const t = new fabric.Textbox('TECH', { left:100, top:270, width:300, fontSize:38, fontFamily:'Oswald', fontWeight:'700', fill:c, textAlign:'center', letterSpacing:6 }); canvas.add(ci); canvas.add(t); }
+        else if (type === 'luxe') { const t = new fabric.Textbox('LUXE', { left:80, top:195, width:340, fontSize:60, fontFamily:'Playfair Display', fontStyle:'italic', fontWeight:'900', fill:'#1a1a2e', textAlign:'center' }); const l1 = new fabric.Rect({ left:130, top:175, width:240, height:1.5, fill:'#d4af37' }); const l2 = new fabric.Rect({ left:130, top:268, width:240, height:1.5, fill:'#d4af37' }); canvas.add(l1); canvas.add(t); canvas.add(l2); }
+        else if (type === 'nature') { const ci = new fabric.Circle({ left:180, top:180, radius:70, fill:'#10b981' }); const t = new fabric.Textbox('NATURE', { left:100, top:270, width:300, fontSize:32, fontFamily:'Montserrat', fontWeight:'700', fill:'#064e3b', textAlign:'center', letterSpacing:4 }); canvas.add(ci); canvas.add(t); }
+        else if (type === 'monogram') { const r = new fabric.Rect({ left:130, top:130, width:240, height:240, rx:20, fill:'#1a1a2e' }); const t = new fabric.Textbox('AB', { left:140, top:190, width:220, fontSize:80, fontFamily:'Playfair Display', fontWeight:'900', fill:c, textAlign:'center' }); canvas.add(r); canvas.add(t); }
+        else if (type === 'geometric') { const pts = []; for (let i=0;i<6;i++) { const a=(i*Math.PI)/3-Math.PI/2; pts.push({x:250+90*Math.cos(a),y:250+90*Math.sin(a)}); } const h = new fabric.Polygon(pts, { fill:c, opacity:0.8 }); const t = new fabric.Textbox('GEO', { left:120, top:215, width:260, fontSize:48, fontFamily:'League Spartan', fontWeight:'900', fill:'#fff', textAlign:'center' }); canvas.add(h); canvas.add(t); }
+        else if (type === 'vintage') { const t = new fabric.Textbox('VINTAGE', { left:70, top:190, width:360, fontSize:48, fontFamily:'Oswald', fontWeight:'700', fill:'#5c3d2e', textAlign:'center', letterSpacing:8 }); const l1 = new fabric.Rect({ left:130, top:170, width:240, height:2, fill:'#c49a6c' }); const l2 = new fabric.Rect({ left:130, top:250, width:240, height:2, fill:'#c49a6c' }); canvas.add(l1); canvas.add(t); canvas.add(l2); }
+        else if (type === 'neon') { canvas.backgroundColor = '#0a0a0f'; const t = new fabric.Textbox('NEON', { left:80, top:190, width:340, fontSize:60, fontFamily:'Righteous', fill:'#ec4899', textAlign:'center', stroke:'#f472b6', strokeWidth:1 }); const l = new fabric.Rect({ left:150, top:260, width:200, height:3, fill:'#06b6d4' }); canvas.add(t); canvas.add(l); }
+        toast('📄 Modèle chargé'); saveState();
+    }
+
+    // === KEYBOARD ===
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Delete' || e.key === 'Backspace') { e.preventDefault(); deleteSelected(); }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'z') { e.preventDefault(); undo(); }
+        if ((e.ctrlKey || e.metaKey) && e.key === 'y') { e.preventDefault(); redo(); }
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') { e.preventDefault(); downloadLogo(); }
+    });
+
+    // === SW ===
+    if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js'); }
+
+    toast('✨ RC Logo Maker prêt');
+</script>
+
+</body>
+</html>
