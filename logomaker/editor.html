@@ -13,7 +13,7 @@
             --bg:#0a0a0f;--panel:#12121a;--panel2:#16161f;--border:#1e1e2b;
             --text:#e8e8ee;--text2:#8a8a9a;--text3:#555566;
             --accent:#5b6af0;--accent2:#7c4af0;--danger:#ef4444;
-            --radius:8px;
+            --radius:8px;--transition:0.15s;
         }
         *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
         html,body{width:100%;height:100%;overflow:hidden;position:fixed;top:0;left:0;background:var(--bg);color:var(--text);font-family:'Inter','DM Sans',sans-serif;user-select:none;-webkit-user-select:none;touch-action:pan-x pan-y}
@@ -21,14 +21,15 @@
         #topbar{height:46px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 8px;gap:6px;flex-shrink:0;z-index:100}
         .brand{font-weight:800;font-size:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;white-space:nowrap}
         .spacer{flex:1}
-        /* ✅ Amélioration 1 : Indicateur de taille */
         .canvas-size-indicator{font-size:9px;color:var(--text3);margin-right:8px;white-space:nowrap;letter-spacing:0.5px}
-        .tbtn{padding:5px 9px;border-radius:5px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:10px;font-family:inherit;display:flex;align-items:center;gap:3px;transition:all .15s;white-space:nowrap}
+        .tbtn{padding:10px 18px;border-radius:25px;border:1px solid var(--border);background:transparent;color:var(--text2);cursor:pointer;font-size:13px;font-family:inherit;display:flex;align-items:center;gap:8px;transition:all var(--transition);white-space:nowrap;min-height:42px;font-weight:600}
         .tbtn:hover{background:var(--panel2);color:var(--text);border-color:var(--accent)}
+        .tbtn svg{width:22px;height:22px;flex-shrink:0}
         .tbtn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+        .tbtn.primary:hover{background:var(--accent2);border-color:var(--accent2)}
         #main{display:flex;flex:1;overflow:hidden}
         #sidebar{width:50px;background:var(--panel);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:4px 0;gap:2px;flex-shrink:0;overflow-y:auto}
-        .stool{width:40px;min-height:40px;border-radius:7px;background:transparent;border:1px solid transparent;color:var(--text2);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:7px;font-family:inherit;transition:all .15s;flex-shrink:0}
+        .stool{width:40px;min-height:40px;border-radius:7px;background:transparent;border:1px solid transparent;color:var(--text2);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:7px;font-family:inherit;transition:all var(--transition);flex-shrink:0}
         .stool:hover{background:var(--panel2);color:var(--text);border-color:var(--border)}
         .stool svg{width:15px;height:15px}
         .sep{width:24px;height:1px;background:var(--border);margin:2px 0;flex-shrink:0}
@@ -37,15 +38,15 @@
         .fly-inner{width:220px;height:100%;overflow-y:auto;padding:10px}
         .fly-title{font-weight:700;font-size:11px;margin-bottom:8px;text-transform:uppercase}
         .shape-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}
-        .shape-item{aspect-ratio:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);transition:all .15s;font-size:18px}
+        .shape-item{aspect-ratio:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text2);transition:all var(--transition);font-size:18px}
         .shape-item:hover{border-color:var(--accent);color:var(--accent);background:rgba(91,106,240,0.1)}
-        /* ✅ Amélioration 4 : Bouton "Ajouter du texte" dédié avec dashed border */
-        .add-text-btn{padding:10px;margin-bottom:6px;background:var(--panel);border:1.5px dashed var(--accent);border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--text2);font-size:11px;font-family:inherit;transition:all .15s;text-align:left;width:100%}
+        .add-text-btn{padding:10px;margin-bottom:6px;background:var(--panel);border:1.5px dashed var(--accent);border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:8px;color:var(--text2);font-size:11px;font-family:inherit;transition:all var(--transition);text-align:left;width:100%}
         .add-text-btn:hover{background:rgba(91,106,240,0.08);color:var(--text);border-color:var(--accent2)}
         .add-text-btn svg{width:18px;height:18px;flex-shrink:0;color:var(--accent)}
         #canvas-area{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;background:#1c1c24;background-image:radial-gradient(circle,#2a2a35 1px,transparent 1px);background-size:20px 20px}
-        #canvas-wrapper{position:relative;transform-origin:center}
+        #canvas-wrapper{position:relative;transform-origin:center;min-width:300px;min-height:300px}
         #main-canvas{display:block;box-shadow:0 8px 60px rgba(0,0,0,0.8);border-radius:2px;cursor:crosshair;touch-action:none}
+        #main-canvas:active{cursor:grabbing}
         #sel-canvas{position:absolute;top:0;left:0;pointer-events:none}
         .canvas-resize-handle{position:absolute;bottom:-18px;right:-18px;width:36px;height:36px;background:var(--accent);border-radius:50%;cursor:nwse-resize;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(91,106,240,0.5);z-index:10;transition:transform .2s}
         .canvas-resize-handle:hover{transform:scale(1.2)}
@@ -69,20 +70,20 @@
         .pbtn:hover{background:rgba(91,106,240,0.15);border-color:var(--accent);color:var(--accent)}
         .btn-row{display:flex;gap:3px}
         .no-sel{text-align:center;color:var(--text3);padding:20px;font-size:10px}
-        /* ✅ Amélioration 2 : ✓ de sélection sur palette couleurs */
-        .swatch-item{position:relative;aspect-ratio:1;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:all .15s}
+        .swatch-item{position:relative;aspect-ratio:1;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:all var(--transition)}
         .swatch-item:hover{border-color:var(--accent);transform:scale(1.08)}
         .swatch-item.active{border-color:var(--accent);box-shadow:0 0 12px rgba(91,106,240,0.4)}
         .swatch-item .check{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;font-size:14px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,0.6);display:none;pointer-events:none}
         .swatch-item.active .check{display:block}
-        /* ✅ Amélioration 5 : Boutons visibilité dans les calques */
-        .layer-vis-btn{width:22px;height:22px;border-radius:4px;background:transparent;border:1px solid transparent;color:var(--text2);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
+        .layer-vis-btn{width:22px;height:22px;border-radius:4px;background:transparent;border:1px solid transparent;color:var(--text2);cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;transition:all var(--transition);flex-shrink:0}
         .layer-vis-btn:hover{border-color:var(--border);background:rgba(255,255,255,0.05);color:var(--text)}
+        .layer-action-btn{width:44px;height:44px;border-radius:10px;border:2px solid var(--border);background:var(--panel2);color:var(--text2);cursor:pointer;font-size:18px;transition:all var(--transition);display:flex;align-items:center;justify-content:center}
+        .layer-action-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-2px)}
         .toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:8px 18px;border-radius:20px;font-weight:600;font-size:0.75rem;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none}
         .toast.show{opacity:1}
         .ctx-bar{display:none;position:fixed;top:55px;left:50%;transform:translateX(-50%);background:var(--panel);border:1px solid var(--border);border-radius:25px;padding:5px 10px;gap:3px;z-index:500;box-shadow:0 4px 20px rgba(0,0,0,0.5)}
         .ctx-bar.active{display:flex}
-        .ctx-bar button{width:30px;height:30px;border-radius:50%;border:none;background:transparent;color:var(--text2);cursor:pointer;font-size:13px;transition:all .15s}
+        .ctx-bar button{width:30px;height:30px;border-radius:50%;border:none;background:transparent;color:var(--text2);cursor:pointer;font-size:13px;transition:all var(--transition)}
         .ctx-bar button:hover{background:var(--panel2);color:var(--text)}
         .ctx-bar button.danger:hover{background:rgba(239,68,68,0.15);color:var(--danger)}
         @media(max-width:768px){#panel{width:150px}#flyout.open{width:180px}.fly-inner{width:180px}.tbtn{font-size:9px;padding:4px 6px}}
@@ -92,7 +93,6 @@
 <div id="app">
     <div id="topbar">
         <span class="brand" onclick="goHome()">← RC Logo Maker</span>
-        <!-- ✅ Amélioration 1 : Indicateur de taille 700×700 -->
         <span class="canvas-size-indicator" id="canvasSizeIndicator">500 × 500</span>
         <div class="spacer"></div>
         <button class="tbtn" onclick="undo()">↩</button>
@@ -184,9 +184,65 @@ function getResizeHandle(pos,el){const bb=getBB(el);const handles={nw:{x:bb.x,y:
 function isPointInElement(pos,el){const bb=getBB(el);return pos.x>=bb.x-10&&pos.x<=bb.x+bb.w+10&&pos.y>=bb.y-10&&pos.y<=bb.y+bb.h+10;}
 function findElementAtPos(pos){for(let i=elements.length-1;i>=0;i--){if(elements[i].visible!==false&&isPointInElement(pos,elements[i]))return elements[i];}return null;}
 
-function resizeElement(el,handle,dx,dy){const bb=getBB(el);let nx=el.x,ny=el.y,nw=bb.w,nh=bb.h;switch(handle){case'se':nw=Math.max(20,bb.w+dx);nh=Math.max(20,bb.h+dy);break;case'e':nw=Math.max(20,bb.w+dx);break;case's':nh=Math.max(20,bb.h+dy);break;case'sw':nw=Math.max(20,bb.w-dx);nh=Math.max(20,bb.h+dy);nx=el.x+bb.w-nw;break;case'nw':nw=Math.max(20,bb.w-dx);nh=Math.max(20,bb.h-dy);nx=el.x+bb.w-nw;ny=el.y+bb.h-nh;break;case'ne':nw=Math.max(20,bb.w+dx);nh=Math.max(20,bb.h-dy);ny=el.y+bb.h-nh;break;case'w':nw=Math.max(20,bb.w-dx);nx=el.x+bb.w-nw;break;case'n':nh=Math.max(20,bb.h-dy);ny=el.y+bb.h-nh;break}if(nx<0){nw+=nx;nx=0;}if(ny<0){nh+=ny;ny=0;}if(nx+nw>canvasW)nw=canvasW-nx;if(ny+nh>canvasH)nh=canvasH-ny;const sx=nw/bb.w,sy=nh/bb.h;switch(el.type){case'rect':el.x=nx;el.y=ny;el.w=nw;el.h=nh;break;case'circle':{const nr=Math.min(nw,nh)/2;el.x=nx+nw/2;el.y=ny+nh/2;el.r=nr;break}case'text':el.x=nx;el.y=ny;const fs=el.fontSize||el.size||40;el.fontSize=Math.max(8,fs*Math.min(sx,sy));el.size=el.fontSize;break;default:el.x=nx;el.y=ny;if(el.size)el.size=Math.max(20,el.size*Math.min(sx,sy));if(el.outerR)el.outerR=Math.max(15,el.outerR*Math.min(sx,sy));break}render();renderProps();}
+// ✅ CORRECTIONS 4-5-6 : resizeElement avec ABSOLUTE_MIN
+function resizeElement(el,handle,dx,dy){
+    const ABSOLUTE_MIN=30;
+    const bb=getBB(el);
+    let nx=el.x,ny=el.y,nw=bb.w,nh=bb.h;
+    switch(handle){
+        case'se':nw=Math.max(ABSOLUTE_MIN,bb.w+dx);nh=Math.max(ABSOLUTE_MIN,bb.h+dy);break;
+        case'e':nw=Math.max(ABSOLUTE_MIN,bb.w+dx);break;
+        case's':nh=Math.max(ABSOLUTE_MIN,bb.h+dy);break;
+        case'sw':nw=Math.max(ABSOLUTE_MIN,bb.w-dx);nh=Math.max(ABSOLUTE_MIN,bb.h+dy);nx=el.x+bb.w-nw;break;
+        case'nw':nw=Math.max(ABSOLUTE_MIN,bb.w-dx);nh=Math.max(ABSOLUTE_MIN,bb.h-dy);nx=el.x+bb.w-nw;ny=el.y+bb.h-nh;break;
+        case'ne':nw=Math.max(ABSOLUTE_MIN,bb.w+dx);nh=Math.max(ABSOLUTE_MIN,bb.h-dy);ny=el.y+bb.h-nh;break;
+        case'w':nw=Math.max(ABSOLUTE_MIN,bb.w-dx);nx=el.x+bb.w-nw;break;
+        case'n':nh=Math.max(ABSOLUTE_MIN,bb.h-dy);ny=el.y+bb.h-nh;break;
+    }
+    if(nx<0){nw+=nx;nx=0}if(ny<0){nh+=ny;ny=0}
+    if(nx+nw>canvasW)nw=canvasW-nx;if(ny+nh>canvasH)nh=canvasH-ny;
+    const sx=nw/bb.w,sy=nh/bb.h;
+    switch(el.type){
+        case'rect':el.x=nx;el.y=ny;el.w=nw;el.h=nh;break;
+        case'circle':{const nr=Math.max(ABSOLUTE_MIN/2,Math.min(nw,nh)/2);el.x=nx+nw/2;el.y=ny+nh/2;el.r=nr;break}
+        case'text':el.x=nx;el.y=ny;const fs=el.fontSize||el.size||40;el.fontSize=Math.max(8,fs*Math.min(sx,sy));el.size=el.fontSize;break;
+        default:el.x=nx;el.y=ny;if(el.size)el.size=Math.max(ABSOLUTE_MIN,el.size*Math.min(sx,sy));if(el.outerR)el.outerR=Math.max(ABSOLUTE_MIN,el.outerR*Math.min(sx,sy));break;
+    }
+    render();renderProps();
+}
 
-function drawSelection(){selCtx.clearRect(0,0,canvasW,canvasH);if(selectedId===null)return;const el=elements.find(e=>e.id===selectedId);if(!el)return;const bb=getBB(el);if(!bb)return;selCtx.strokeStyle='#5b6af0';selCtx.lineWidth=2.5;selCtx.setLineDash([6,3]);selCtx.strokeRect(bb.x-2,bb.y-2,bb.w+4,bb.h+4);selCtx.setLineDash([]);const hs=16;const handles=[{x:bb.x,y:bb.y},{x:bb.x+bb.w/2,y:bb.y},{x:bb.x+bb.w,y:bb.y},{x:bb.x,y:bb.y+bb.h/2},{x:bb.x+bb.w,y:bb.y+bb.h/2},{x:bb.x,y:bb.y+bb.h},{x:bb.x+bb.w/2,y:bb.y+bb.h},{x:bb.x+bb.w,y:bb.y+bb.h}];handles.forEach(h=>{selCtx.fillStyle='#fff';selCtx.shadowColor='rgba(0,0,0,0.3)';selCtx.shadowBlur=4;selCtx.beginPath();selCtx.arc(h.x,h.y,hs/2,0,Math.PI*2);selCtx.fill();selCtx.shadowBlur=0;selCtx.strokeStyle='#5b6af0';selCtx.lineWidth=2;selCtx.stroke();});}
+// ✅ CORRECTION 11 : drawSelection avec poignée de rotation
+function drawSelection(){
+    selCtx.clearRect(0,0,canvasW,canvasH);
+    if(selectedId===null)return;
+    const el=elements.find(e=>e.id===selectedId);
+    if(!el)return;
+    const bb=getBB(el);
+    if(!bb)return;
+    // Rectangle de sélection
+    selCtx.strokeStyle='#5b6af0';selCtx.lineWidth=2.5;selCtx.setLineDash([6,3]);
+    selCtx.strokeRect(bb.x-2,bb.y-2,bb.w+4,bb.h+4);selCtx.setLineDash([]);
+    // Poignées de resize
+    const hs=16;
+    const handles=[
+        {x:bb.x,y:bb.y},{x:bb.x+bb.w/2,y:bb.y},{x:bb.x+bb.w,y:bb.y},
+        {x:bb.x,y:bb.y+bb.h/2},{x:bb.x+bb.w,y:bb.y+bb.h/2},
+        {x:bb.x,y:bb.y+bb.h},{x:bb.x+bb.w/2,y:bb.y+bb.h},{x:bb.x+bb.w,y:bb.y+bb.h}
+    ];
+    handles.forEach(h=>{
+        selCtx.fillStyle='#fff';selCtx.shadowColor='rgba(0,0,0,0.3)';selCtx.shadowBlur=4;
+        selCtx.beginPath();selCtx.arc(h.x,h.y,hs/2,0,Math.PI*2);selCtx.fill();selCtx.shadowBlur=0;
+        selCtx.strokeStyle='#5b6af0';selCtx.lineWidth=2;selCtx.stroke();
+    });
+    // Poignée de rotation
+    const rotX=bb.x+bb.w/2,rotY=bb.y-25;
+    selCtx.strokeStyle='rgba(91,106,240,0.5)';selCtx.lineWidth=1.5;selCtx.setLineDash([3,3]);
+    selCtx.beginPath();selCtx.moveTo(bb.x+bb.w/2,bb.y);selCtx.lineTo(rotX,rotY);selCtx.stroke();
+    selCtx.setLineDash([]);
+    selCtx.fillStyle='#5b6af0';selCtx.shadowColor='rgba(91,106,240,0.4)';selCtx.shadowBlur=8;
+    selCtx.beginPath();selCtx.arc(rotX,rotY,7,0,Math.PI*2);selCtx.fill();selCtx.shadowBlur=0;
+    selCtx.strokeStyle='#fff';selCtx.lineWidth=1.5;selCtx.stroke();
+}
 
 // ═══════════ CANVAS RESIZE ═══════════
 const canvasResizeHandle=document.getElementById('canvasResizeHandle');
@@ -201,7 +257,36 @@ canvas.addEventListener('pointerup',function(){if(isDragging||isResizing)saveHis
 canvas.addEventListener('pointerleave',function(){isDragging=false;isResizing=false;});
 canvas.addEventListener('dblclick',function(e){const pos=getPos(e);const hit=findElementAtPos(pos);if(hit&&hit.type==='text'){const t=prompt('Modifier le texte:',hit.text);if(t!==null){hit.text=t;saveHistory();render();renderProps()}}});
 
-function render(){ctx.clearRect(0,0,canvasW,canvasH);ctx.fillStyle=canvasBg;ctx.fillRect(0,0,canvasW,canvasH);elements.filter(e=>e.visible!==false).forEach(e=>{ctx.save();ctx.globalAlpha=e.opacity??1;if(e.shadow){ctx.shadowColor=e.shadow.color||'rgba(0,0,0,0.3)';ctx.shadowBlur=e.shadow.blur||10;ctx.shadowOffsetX=e.shadow.x||3;ctx.shadowOffsetY=e.shadow.y||3}if(e.glow){ctx.shadowColor=e.glow.color||'rgba(91,106,240,0.6)';ctx.shadowBlur=e.glow.blur||15;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0}if(e.type==='rect'){ctx.fillStyle=e.fill;if(e.rx>0){ctx.beginPath();roundRect(ctx,e.x,e.y,e.w,e.h,e.rx);ctx.fill()}else ctx.fillRect(e.x,e.y,e.w,e.h);if(e.stroke!=='none'&&e.strokeW>0){ctx.strokeStyle=e.stroke;ctx.lineWidth=e.strokeW;if(e.rx>0){ctx.beginPath();roundRect(ctx,e.x,e.y,e.w,e.h,e.rx);ctx.stroke()}else ctx.strokeRect(e.x,e.y,e.w,e.h)}}else if(e.type==='circle'){ctx.beginPath();ctx.arc(e.x,e.y,e.r,0,Math.PI*2);ctx.fillStyle=e.fill;ctx.fill();if(e.stroke!=='none'&&e.strokeW>0){ctx.strokeStyle=e.stroke;ctx.lineWidth=e.strokeW;ctx.stroke()}}else if(e.type==='triangle'){const s=e.size;ctx.beginPath();ctx.moveTo(e.x,e.y-s/2);ctx.lineTo(e.x+s/2,e.y+s/2);ctx.lineTo(e.x-s/2,e.y+s/2);ctx.closePath();ctx.fillStyle=e.fill;ctx.fill()}else if(e.type==='star'){ctx.beginPath();for(let i=0;i<e.points*2;i++){const a=(i/(e.points*2))*Math.PI*2-Math.PI/2;const r=i%2===0?e.outerR:e.innerR;const px=e.x+r*Math.cos(a),py=e.y+r*Math.sin(a);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py)}ctx.closePath();ctx.fillStyle=e.fill;ctx.fill()}else if(e.type==='polygon'){ctx.beginPath();for(let i=0;i<e.sides;i++){const a=(i/e.sides)*Math.PI*2-Math.PI/2;const px=e.x+e.size*Math.cos(a),py=e.y+e.size*Math.sin(a);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py)}ctx.closePath();ctx.fillStyle=e.fill;ctx.fill()}else if(e.type==='heart'){ctx.save();ctx.translate(e.x,e.y);ctx.scale(e.size/180,e.size/180);ctx.fillStyle=e.fill;ctx.beginPath();ctx.moveTo(0,-30);ctx.bezierCurveTo(-50,-80,-80,-20,0,50);ctx.bezierCurveTo(80,-20,50,-80,0,-30);ctx.fill();ctx.restore()}else if(e.type==='line'){ctx.beginPath();ctx.moveTo(e.x1,e.y1);ctx.lineTo(e.x2,e.y2);ctx.strokeStyle=e.stroke;ctx.lineWidth=e.strokeW;ctx.stroke()}else if(e.type==='text'){ctx.font=`${e.style||'normal'} ${e.weight||'400'} ${e.fontSize||e.size||40}px "${e.font}"`;ctx.textAlign=e.align||'center';ctx.textBaseline='top';if(e.letterSpacing)ctx.letterSpacing=e.letterSpacing+'px';ctx.fillStyle=e.fill;const lines=e.text.split('\n');lines.forEach((l,i)=>{ctx.fillText(l,e.x,e.y+i*(e.fontSize||e.size||40)*(e.lineHeight||1.2))});ctx.letterSpacing='0px'}else if(e.type==='icon'){ctx.font=`${e.size}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=e.fill;ctx.fillText(e.char,e.x,e.y)}ctx.restore();});drawSelection();}
+// ✅ CORRECTION 9 : Rotation appliquée dans render()
+function render(){
+    ctx.clearRect(0,0,canvasW,canvasH);
+    ctx.fillStyle=canvasBg;ctx.fillRect(0,0,canvasW,canvasH);
+    elements.filter(e=>e.visible!==false).forEach(e=>{
+        ctx.save();
+        ctx.globalAlpha=e.opacity??1;
+        // Appliquer rotation
+        if(e.rotation){
+            const cx=(e.type==='line')?(e.x1+e.x2)/2:e.x;
+            const cy=(e.type==='line')?(e.y1+e.y2)/2:e.y;
+            ctx.translate(cx,cy);
+            ctx.rotate(e.rotation*Math.PI/180);
+            ctx.translate(-cx,-cy);
+        }
+        if(e.shadow){ctx.shadowColor=e.shadow.color||'rgba(0,0,0,0.3)';ctx.shadowBlur=e.shadow.blur||10;ctx.shadowOffsetX=e.shadow.x||3;ctx.shadowOffsetY=e.shadow.y||3}
+        if(e.glow){ctx.shadowColor=e.glow.color||'rgba(91,106,240,0.6)';ctx.shadowBlur=e.glow.blur||15;ctx.shadowOffsetX=0;ctx.shadowOffsetY=0}
+        if(e.type==='rect'){ctx.fillStyle=e.fill;if(e.rx>0){ctx.beginPath();roundRect(ctx,e.x,e.y,e.w,e.h,e.rx);ctx.fill()}else ctx.fillRect(e.x,e.y,e.w,e.h);if(e.stroke!=='none'&&e.strokeW>0){ctx.strokeStyle=e.stroke;ctx.lineWidth=e.strokeW;if(e.rx>0){ctx.beginPath();roundRect(ctx,e.x,e.y,e.w,e.h,e.rx);ctx.stroke()}else ctx.strokeRect(e.x,e.y,e.w,e.h)}}
+        else if(e.type==='circle'){ctx.beginPath();ctx.arc(e.x,e.y,e.r,0,Math.PI*2);ctx.fillStyle=e.fill;ctx.fill();if(e.stroke!=='none'&&e.strokeW>0){ctx.strokeStyle=e.stroke;ctx.lineWidth=e.strokeW;ctx.stroke()}}
+        else if(e.type==='triangle'){const s=e.size;ctx.beginPath();ctx.moveTo(e.x,e.y-s/2);ctx.lineTo(e.x+s/2,e.y+s/2);ctx.lineTo(e.x-s/2,e.y+s/2);ctx.closePath();ctx.fillStyle=e.fill;ctx.fill()}
+        else if(e.type==='star'){ctx.beginPath();for(let i=0;i<e.points*2;i++){const a=(i/(e.points*2))*Math.PI*2-Math.PI/2;const r=i%2===0?e.outerR:e.innerR;const px=e.x+r*Math.cos(a),py=e.y+r*Math.sin(a);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py)}ctx.closePath();ctx.fillStyle=e.fill;ctx.fill()}
+        else if(e.type==='polygon'){ctx.beginPath();for(let i=0;i<e.sides;i++){const a=(i/e.sides)*Math.PI*2-Math.PI/2;const px=e.x+e.size*Math.cos(a),py=e.y+e.size*Math.sin(a);i===0?ctx.moveTo(px,py):ctx.lineTo(px,py)}ctx.closePath();ctx.fillStyle=e.fill;ctx.fill()}
+        else if(e.type==='heart'){ctx.save();ctx.translate(e.x,e.y);ctx.scale(e.size/180,e.size/180);ctx.fillStyle=e.fill;ctx.beginPath();ctx.moveTo(0,-30);ctx.bezierCurveTo(-50,-80,-80,-20,0,50);ctx.bezierCurveTo(80,-20,50,-80,0,-30);ctx.fill();ctx.restore()}
+        else if(e.type==='line'){ctx.beginPath();ctx.moveTo(e.x1,e.y1);ctx.lineTo(e.x2,e.y2);ctx.strokeStyle=e.stroke;ctx.lineWidth=e.strokeW;ctx.stroke()}
+        else if(e.type==='text'){ctx.font=`${e.style||'normal'} ${e.weight||'400'} ${e.fontSize||e.size||40}px "${e.font}"`;ctx.textAlign=e.align||'center';ctx.textBaseline='top';if(e.letterSpacing)ctx.letterSpacing=e.letterSpacing+'px';ctx.fillStyle=e.fill;const lines=e.text.split('\n');lines.forEach((l,i)=>{ctx.fillText(l,e.x,e.y+i*(e.fontSize||e.size||40)*(e.lineHeight||1.2))});ctx.letterSpacing='0px'}
+        else if(e.type==='icon'){ctx.font=`${e.size}px serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=e.fill;ctx.fillText(e.char,e.x,e.y)}
+        ctx.restore();
+    });
+    drawSelection();
+}
 function roundRect(c,x,y,w,h,r){r=Math.min(r,w/2,h/2);c.beginPath();c.moveTo(x+r,y);c.lineTo(x+w-r,y);c.arcTo(x+w,y,x+w,y+r,r);c.lineTo(x+w,y+h-r);c.arcTo(x+w,y+h,x+w-r,y+h,r);c.lineTo(x+r,y+h);c.arcTo(x,y+h,x,y+h-r,r);c.lineTo(x,y+r);c.arcTo(x,y,x+r,y,r);c.closePath()}
 
 function showCtx(){document.getElementById('ctx-bar').classList.add('active')}
@@ -229,14 +314,12 @@ function changeOpacity(){const el=elements.find(e=>e.id===selectedId);if(!el)ret
 function toggleFlyout(name){const fly=document.getElementById('flyout');if(currentFlyout===name){fly.classList.remove('open');currentFlyout=null}else{currentFlyout=name;fly.classList.add('open');renderFlyout(name)}}
 function renderFlyout(name){const c=document.getElementById('flyout-content');if(name==='shapes')c.innerHTML='<div class="fly-title">Formes</div><div class="shape-grid">'+[{l:'Rect',a:'addRect()',i:'⬛'},{l:'Cercle',a:'addCircle()',i:'⭕'},{l:'Triang.',a:'addTriangle()',i:'🔺'},{l:'Étoile',a:'addStar()',i:'⭐'},{l:'Ligne',a:'addLine()',i:'➖'},{l:'Hexag.',a:'addHexagon()',i:'⬡'},{l:'Diamant',a:'addDiamond()',i:'💎'},{l:'Cœur',a:'addHeart()',i:'❤️'}].map(s=>`<div class="shape-item" onclick="${s.a}">${s.i}</div>`).join('')+'</div>';
 else if(name==='text'){
-    // ✅ Amélioration 4 : Bouton "Ajouter du texte" dédié
     c.innerHTML='<div class="fly-title">Texte</div>'+
     '<button class="add-text-btn" onclick="addText(\'NOUVEAU TEXTE\')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Ajouter du texte</button>'+
     [{t:'TITRE',s:42,w:'900'},{t:'Sous-titre',s:24,w:'700'},{t:'Corps',s:16,w:'400'},{t:'Slogan',s:13,w:'400'}].map(t=>`<div style="padding:10px;background:var(--panel);border:1px solid var(--border);border-radius:6px;cursor:pointer;margin-bottom:4px;font-family:Montserrat;font-size:${t.s/3}px;font-weight:${t.w};color:var(--text2)" onclick="addText('${t.t}')">${t.t} – ${t.w}</div>`).join('');
 }
 else if(name==='icons')c.innerHTML='<div class="fly-title">Icônes</div><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px">'+ICONS.map(ic=>`<div style="aspect-ratio:1;background:var(--panel);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:var(--text2)" onclick="addIcon('${ic}')">${ic}</div>`).join('')+'</div>';
 else if(name==='colors'){
-    // ✅ Amélioration 2 : Palette avec ✓ de sélection
     const selFill=selectedId!==null?(elements.find(e=>e.id===selectedId)||{}).fill:null;
     c.innerHTML='<div class="fly-title">Couleurs</div><div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:10px">'+COLORS.map(cl=>{
         const isActive=selFill&&selFill.toLowerCase()===cl.toLowerCase();
@@ -245,30 +328,20 @@ else if(name==='colors'){
 }
 else if(name==='bg')c.innerHTML='<div class="fly-title">Arrière-plan</div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-bottom:10px">'+['#ffffff','#000000','#0d0d0f','#1a1a2e','#f8fafc','#fef2f2','#f0fdf4','#fffbeb'].map(cl=>`<div style="aspect-ratio:1;background:${cl};border-radius:4px;cursor:pointer;border:2px solid transparent" onclick="setCanvasBg('${cl}')"></div>`).join('')+'</div><div class="plabel">Perso</div><div class="prow"><input type="color" class="pinp" value="'+canvasBg+'" onchange="setCanvasBg(this.value)" style="width:36px;height:28px"><input class="pinp" value="'+canvasBg+'" onchange="setCanvasBg(this.value)"></div>';
 }
-function applyColor(cl){if(selectedId===null){setCanvasBg(cl);return}const el=elements.find(e=>e.id===selectedId);if(!el)return;el.fill=cl;saveHistory();render();renderProps();toast('Couleur appliquée');
-// Rafraîchir le flyout couleurs pour le ✓
-if(currentFlyout==='colors')renderFlyout('colors');}
+function applyColor(cl){if(selectedId===null){setCanvasBg(cl);return}const el=elements.find(e=>e.id===selectedId);if(!el)return;el.fill=cl;saveHistory();render();renderProps();toast('Couleur appliquée');if(currentFlyout==='colors')renderFlyout('colors');}
 function setCanvasBg(cl){canvasBg=cl;render();saveHistory()}
 
-function renderProps(){const c=document.getElementById('tab-props');if(selectedId===null){c.innerHTML='<div class="no-sel">Sélectionnez un élément</div>';return}const el=elements.find(e=>e.id===selectedId);if(!el)return;const fs=el.fontSize||el.size||40;let h='<div class="pgroup"><div class="plabel">Position</div><div class="prow"><input class="pinp" type="number" value="'+Math.round(el.x)+'" onchange="updateProp(\'x\',+this.value)"><input class="pinp" type="number" value="'+Math.round(el.y)+'" onchange="updateProp(\'y\',+this.value)"></div></div>';if(el.type==='rect')h+='<div class="pgroup"><div class="plabel">Taille</div><div class="prow"><input class="pinp" type="number" value="'+Math.round(el.w)+'" onchange="updateProp(\'w\',+this.value)"><input class="pinp" type="number" value="'+Math.round(el.h)+'" onchange="updateProp(\'h\',+this.value)"></div><div class="prow"><span style="font-size:9px;color:var(--text3)">Rayon</span><input class="pslider" type="range" min="0" max="100" value="'+(el.rx||0)+'" oninput="updateProp(\'rx\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.rx||0)+'px</span></div></div>';if(el.type==='circle')h+='<div class="pgroup"><div class="plabel">Rayon</div><div class="prow"><input class="pslider" type="range" min="5" max="200" value="'+el.r+'" oninput="updateProp(\'r\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+el.r+'px</span></div></div>';if(el.type==='triangle')h+='<div class="pgroup"><div class="plabel">Taille</div><div class="prow"><input class="pslider" type="range" min="20" max="300" value="'+(el.size||60)+'" oninput="updateProp(\'size\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.size||60)+'px</span></div></div>';if(el.type==='star')h+='<div class="pgroup"><div class="plabel">Taille</div><div class="prow"><input class="pslider" type="range" min="10" max="200" value="'+(el.outerR||60)+'" oninput="updateProp(\'outerR\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.outerR||60)+'px</span></div></div>';if(el.type==='line')h+='<div class="pgroup"><div class="plabel">Épaisseur</div><div class="prow"><input class="pslider" type="range" min="1" max="20" value="'+(el.strokeW||3)+'" oninput="updateProp(\'strokeW\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.strokeW||3)+'px</span></div></div>';h+='<div class="pgroup"><div class="plabel">Rotation</div><div class="prow"><input class="pslider" type="range" min="-180" max="180" value="'+(el.rotation||0)+'" oninput="updateProp(\'rotation\',+this.value);this.nextElementSibling.textContent=this.value+\'°\'"><span class="pval">'+(el.rotation||0)+'°</span></div></div>';h+='<div class="pgroup"><div class="plabel">Opacité</div><div class="prow"><input class="pslider" type="range" min="0" max="1" step="0.01" value="'+(el.opacity??1)+'" oninput="updateProp(\'opacity\',+this.value);this.nextElementSibling.textContent=Math.round(this.value*100)+\'%\'"><span class="pval">'+Math.round((el.opacity??1)*100)+'%</span></div></div>';if(el.type==='text')h+='<div class="pgroup"><div class="plabel">Texte</div><div class="prow"><textarea class="pinp" rows="2" onchange="updateProp(\'text\',this.value)" style="resize:vertical">'+el.text+'</textarea></div><div class="prow"><select class="psel" onchange="updateProp(\'font\',this.value)">'+FONTS.map(f=>`<option value="${f}" ${el.font===f?'selected':''}>${f}</option>`).join('')+'</select></div><div class="prow"><input class="pinp" type="number" value="'+fs+'" onchange="updateProp(\'fontSize\',+this.value);updateProp(\'size\',+this.value)" placeholder="Taille"><select class="psel" onchange="updateProp(\'weight\',this.value)"><option value="400" '+(el.weight==='400'?'selected':'')+'>Normal</option><option value="700" '+(el.weight==='700'?'selected':'')+'>Gras</option><option value="900" '+(el.weight==='900'?'selected':'')+'>Black</option></select></div><div class="prow"><span style="font-size:9px;color:var(--text3)">Espacement</span><input class="pslider" type="range" min="-5" max="30" value="'+(el.letterSpacing||0)+'" oninput="updateProp(\'letterSpacing\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.letterSpacing||0)+'px</span></div><div class="prow"><span style="font-size:9px;color:var(--text3)">Interligne</span><input class="pslider" type="range" min="0.8" max="3" step="0.1" value="'+(el.lineHeight||1.2)+'" oninput="updateProp(\'lineHeight\',+this.value);this.nextElementSibling.textContent=this.value"><span class="pval">'+(el.lineHeight||1.2)+'</span></div></div>';h+='<div class="pgroup"><div class="plabel">Couleur</div><div class="prow"><input type="color" class="pinp" value="'+(el.fill||el.stroke||'#5b6af0')+'" oninput="updateProp(\''+(el.type==='line'?'stroke':'fill')+'\',this.value)" style="width:36px;height:28px"><input class="pinp" value="'+(el.fill||el.stroke||'#5b6af0')+'" onchange="updateProp(\''+(el.type==='line'?'stroke':'fill')+'\',this.value)"></div></div>';h+='<div class="pgroup"><div class="btn-row"><button class="pbtn" onclick="duplicateSelected()">📋</button><button class="pbtn" onclick="deleteSelected()" style="color:#ef4444">🗑️</button></div></div>';c.innerHTML=h;}
+// ✅ CORRECTION 10 : render() immédiat dans updateProp
+function renderProps(){const c=document.getElementById('tab-props');if(selectedId===null){c.innerHTML='<div class="no-sel">Sélectionnez un élément</div>';return}const el=elements.find(e=>e.id===selectedId);if(!el)return;const fs=el.fontSize||el.size||40;let h='<div class="pgroup"><div class="plabel">Position</div><div class="prow"><input class="pinp" type="number" value="'+Math.round(el.x)+'" onchange="updateProp(\'x\',+this.value)"><input class="pinp" type="number" value="'+Math.round(el.y)+'" onchange="updateProp(\'y\',+this.value)"></div></div>';if(el.type==='rect')h+='<div class="pgroup"><div class="plabel">Taille</div><div class="prow"><input class="pinp" type="number" value="'+Math.round(el.w)+'" onchange="updateProp(\'w\',+this.value)"><input class="pinp" type="number" value="'+Math.round(el.h)+'" onchange="updateProp(\'h\',+this.value)"></div><div class="prow"><span style="font-size:9px;color:var(--text3)">Rayon</span><input class="pslider" type="range" min="0" max="100" value="'+(el.rx||0)+'" oninput="updateProp(\'rx\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.rx||0)+'px</span></div></div>';if(el.type==='circle')h+='<div class="pgroup"><div class="plabel">Rayon</div><div class="prow"><input class="pslider" type="range" min="5" max="200" value="'+el.r+'" oninput="updateProp(\'r\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+el.r+'px</span></div></div>';if(el.type==='triangle')h+='<div class="pgroup"><div class="plabel">Taille</div><div class="prow"><input class="pslider" type="range" min="20" max="300" value="'+(el.size||60)+'" oninput="updateProp(\'size\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.size||60)+'px</span></div></div>';if(el.type==='star')h+='<div class="pgroup"><div class="plabel">Taille</div><div class="prow"><input class="pslider" type="range" min="10" max="200" value="'+(el.outerR||60)+'" oninput="updateProp(\'outerR\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.outerR||60)+'px</span></div></div>';if(el.type==='line')h+='<div class="pgroup"><div class="plabel">Épaisseur</div><div class="prow"><input class="pslider" type="range" min="1" max="20" value="'+(el.strokeW||3)+'" oninput="updateProp(\'strokeW\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.strokeW||3)+'px</span></div></div>';
+// Slider rotation avec updateProp immédiat
+h+='<div class="pgroup"><div class="plabel">Rotation</div><div class="prow"><input class="pslider" type="range" min="-180" max="180" value="'+(el.rotation||0)+'" oninput="updateProp(\'rotation\',+this.value);this.nextElementSibling.textContent=this.value+\'°\'"><span class="pval">'+(el.rotation||0)+'°</span></div></div>';
+h+='<div class="pgroup"><div class="plabel">Opacité</div><div class="prow"><input class="pslider" type="range" min="0" max="1" step="0.01" value="'+(el.opacity??1)+'" oninput="updateProp(\'opacity\',+this.value);this.nextElementSibling.textContent=Math.round(this.value*100)+\'%\'"><span class="pval">'+Math.round((el.opacity??1)*100)+'%</span></div></div>';if(el.type==='text')h+='<div class="pgroup"><div class="plabel">Texte</div><div class="prow"><textarea class="pinp" rows="2" onchange="updateProp(\'text\',this.value)" style="resize:vertical">'+el.text+'</textarea></div><div class="prow"><select class="psel" onchange="updateProp(\'font\',this.value)">'+FONTS.map(f=>`<option value="${f}" ${el.font===f?'selected':''}>${f}</option>`).join('')+'</select></div><div class="prow"><input class="pinp" type="number" value="'+fs+'" onchange="updateProp(\'fontSize\',+this.value);updateProp(\'size\',+this.value)" placeholder="Taille"><select class="psel" onchange="updateProp(\'weight\',this.value)"><option value="400" '+(el.weight==='400'?'selected':'')+'>Normal</option><option value="700" '+(el.weight==='700'?'selected':'')+'>Gras</option><option value="900" '+(el.weight==='900'?'selected':'')+'>Black</option></select></div><div class="prow"><span style="font-size:9px;color:var(--text3)">Espacement</span><input class="pslider" type="range" min="-5" max="30" value="'+(el.letterSpacing||0)+'" oninput="updateProp(\'letterSpacing\',+this.value);this.nextElementSibling.textContent=this.value+\'px\'"><span class="pval">'+(el.letterSpacing||0)+'px</span></div><div class="prow"><span style="font-size:9px;color:var(--text3)">Interligne</span><input class="pslider" type="range" min="0.8" max="3" step="0.1" value="'+(el.lineHeight||1.2)+'" oninput="updateProp(\'lineHeight\',+this.value);this.nextElementSibling.textContent=this.value"><span class="pval">'+(el.lineHeight||1.2)+'</span></div></div>';h+='<div class="pgroup"><div class="plabel">Couleur</div><div class="prow"><input type="color" class="pinp" value="'+(el.fill||el.stroke||'#5b6af0')+'" oninput="updateProp(\''+(el.type==='line'?'stroke':'fill')+'\',this.value)" style="width:36px;height:28px"><input class="pinp" value="'+(el.fill||el.stroke||'#5b6af0')+'" onchange="updateProp(\''+(el.type==='line'?'stroke':'fill')+'\',this.value)"></div></div>';h+='<div class="pgroup"><div class="btn-row"><button class="pbtn" onclick="duplicateSelected()">📋</button><button class="pbtn" onclick="deleteSelected()" style="color:#ef4444">🗑️</button></div></div>';c.innerHTML=h;}
 function updateProp(k,v){if(selectedId===null)return;const el=elements.find(e=>e.id===selectedId);if(!el)return;el[k]=v;render();clearTimeout(window._pt);window._pt=setTimeout(()=>saveHistory(),400)}
 
-// ✅ Amélioration 5 : updateLayersList() avec boutons visibilité
-function renderLayers(){const c=document.getElementById('tab-layers');if(elements.length===0){c.innerHTML='<div class="no-sel">Aucun calque</div>';return}c.innerHTML='<div style="font-weight:700;font-size:10px;margin-bottom:6px">'+elements.length+' éléments</div><div style="display:flex;flex-direction:column;gap:2px">'+[...elements].reverse().map(el=>{
-    const isSelected=el.id===selectedId;
-    const visIcon=el.visible!==false?'👁':'👁‍🗨';
-    const visOpacity=el.visible!==false?1:0.35;
-    return`<div style="display:flex;align-items:center;gap:5px;padding:5px 7px;border-radius:5px;background:var(--panel2);border:1px solid ${isSelected?'var(--accent)':'var(--border)'};cursor:pointer;font-size:10px;opacity:${visOpacity}" onclick="selectLayer(${el.id})">
-        <span style="width:20px;height:20px;border-radius:3px;background:${el.fill||el.stroke||'#444'};flex-shrink:0"></span>
-        <span style="flex:1">${el.type==='text'?el.text.substring(0,15):el.type}</span>
-        <button class="layer-vis-btn" onclick="event.stopPropagation();toggleLayerVisibility(${el.id})" title="${el.visible!==false?'Masquer':'Afficher'}">${visIcon}</button>
-    </div>`;
-}).join('')+'</div>';}
+function renderLayers(){const c=document.getElementById('tab-layers');if(elements.length===0){c.innerHTML='<div class="no-sel">Aucun calque</div>';return}c.innerHTML='<div style="font-weight:700;font-size:10px;margin-bottom:6px">'+elements.length+' éléments</div><div style="display:flex;flex-direction:column;gap:2px">'+[...elements].reverse().map(el=>{const isSelected=el.id===selectedId;const visIcon=el.visible!==false?'👁':'👁‍🗨';const visOpacity=el.visible!==false?1:0.35;return`<div style="display:flex;align-items:center;gap:5px;padding:5px 7px;border-radius:5px;background:var(--panel2);border:1px solid ${isSelected?'var(--accent)':'var(--border)'};cursor:pointer;font-size:10px;opacity:${visOpacity}" onclick="selectLayer(${el.id})"><span style="width:20px;height:20px;border-radius:3px;background:${el.fill||el.stroke||'#444'};flex-shrink:0"></span><span style="flex:1">${el.type==='text'?el.text.substring(0,15):el.type}</span><button class="layer-vis-btn" onclick="event.stopPropagation();toggleLayerVisibility(${el.id})" title="${el.visible!==false?'Masquer':'Afficher'}">${visIcon}</button></div>`}).join('')+'</div>';}
 function selectLayer(id){selectedId=id;render();renderProps();renderLayers();showCtx()}
-// ✅ Amélioration 5 : toggle visibilité
 function toggleLayerVisibility(id){const el=elements.find(e=>e.id===id);if(!el)return;el.visible=el.visible===false?true:false;saveHistory();render();renderLayers();toast(el.visible?'Calque visible':'Calque masqué')}
 
-// ✅ Amélioration 1 : Mise à jour indicateur de taille
 function updateCanvasSizeIndicator(){document.getElementById('canvasSizeIndicator').textContent=canvasW+' × '+canvasH;}
 
 function renderCanvasSettings(){const c=document.getElementById('tab-canvas');c.innerHTML='<div class="pgroup"><div class="plabel">Taille</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px">'+SIZES.map(s=>`<div class="pbtn" style="text-align:center;padding:6px;'+(canvasW===s[0]&&canvasH===s[1]?'background:rgba(91,106,240,0.2);border-color:var(--accent)':'')+'" onclick="resizeCanvas(${s[0]},${s[1]})">${s[2]}<br><small>${s[0]}x${s[1]}</small></div>`).join('')+'</div><div class="prow"><input class="pinp" id="cw-inp" type="number" value="'+canvasW+'" min="100"><input class="pinp" id="ch-inp" type="number" value="'+canvasH+'" min="100"><button class="pbtn" onclick="resizeCanvas(+document.getElementById(\'cw-inp\').value,+document.getElementById(\'ch-inp\').value)">OK</button></div></div><div class="pgroup"><div class="plabel">Fond</div><div class="prow"><input type="color" class="pinp" value="'+canvasBg+'" onchange="setCanvasBg(this.value)" style="width:36px;height:28px"><input class="pinp" value="'+canvasBg+'" onchange="setCanvasBg(this.value)"></div></div><div class="pgroup"><div class="plabel">Export</div><div class="btn-row"><button class="pbtn" onclick="exportPNG()">PNG</button><button class="pbtn" onclick="exportPNG2x()">PNG@2x</button><button class="pbtn" onclick="exportSVG()">SVG</button><button class="pbtn" onclick="exportJPG()">JPG</button></div></div>';}
@@ -287,20 +360,13 @@ function exportJPG(){selectedId=null;render();const a=document.createElement('a'
 
 function goHome(){window.location.href='index.html'}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
-// ✅ Amélioration 3 : Raccourcis Ctrl+[ et Ctrl+] ajoutés
-document.addEventListener('keydown',function(e){if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();deleteSelected()}if(e.ctrlKey&&e.key==='z'){e.preventDefault();undo()}if(e.ctrlKey&&e.key==='y'){e.preventDefault();redo()}if(e.ctrlKey&&e.key==='d'){e.preventDefault();duplicateSelected()}if(e.ctrlKey&&e.key==='s'){e.preventDefault();exportPNG()}
-// ✅ Amélioration 3 : Ctrl+[ reculer, Ctrl+] avancer
-if(e.ctrlKey&&e.key==='['){e.preventDefault();sendBackward()}
-if(e.ctrlKey&&e.key===']'){e.preventDefault();bringForward()}
-if(e.key==='Escape'){document.getElementById('flyout').classList.remove('open');currentFlyout=null}});
+document.addEventListener('keydown',function(e){if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;if(e.key==='Delete'||e.key==='Backspace'){e.preventDefault();deleteSelected()}if(e.ctrlKey&&e.key==='z'){e.preventDefault();undo()}if(e.ctrlKey&&e.key==='y'){e.preventDefault();redo()}if(e.ctrlKey&&e.key==='d'){e.preventDefault();duplicateSelected()}if(e.ctrlKey&&e.key==='s'){e.preventDefault();exportPNG()}if(e.ctrlKey&&e.key==='['){e.preventDefault();sendBackward()}if(e.ctrlKey&&e.key===']'){e.preventDefault();bringForward()}if(e.key==='Escape'){document.getElementById('flyout').classList.remove('open');currentFlyout=null}});
 
 function addHexagon(){const el={id:mkId(),type:'polygon',x:canvasW/2,y:canvasH/2,size:60,sides:6,fill:'#5b6af0',opacity:1,rotation:0,visible:true,shadow:null,glow:null};elements.push(el);selectedId=el.id;saveHistory();render();renderProps();renderLayers();showCtx();toast('Hexagone')}
 function addDiamond(){const el={id:mkId(),type:'polygon',x:canvasW/2,y:canvasH/2,size:55,sides:4,fill:'#7c4af0',opacity:1,rotation:0,visible:true,shadow:null,glow:null};elements.push(el);selectedId=el.id;saveHistory();render();renderProps();renderLayers();showCtx();toast('Diamant')}
 function addHeart(){const el={id:mkId(),type:'heart',x:canvasW/2,y:canvasH/2,size:80,fill:'#ef4444',opacity:1,rotation:0,visible:true,shadow:null,glow:null};elements.push(el);selectedId=el.id;saveHistory();render();renderProps();renderLayers();showCtx();toast('Cœur')}
 
-function init(){canvasBg='#0d0d0f';const bg=makeRect(130,130,240,240);bg.rx=14;bg.fill='#5b6af0';const txt=makeText(250,195,'RC');txt.fontSize=90;txt.size=90;txt.weight='900';txt.fill='#ffffff';const sub=makeText(250,295,'LOGO MAKER');sub.fontSize=15;sub.size=15;sub.weight='600';sub.fill='rgba(255,255,255,0.7)';sub.letterSpacing=3;elements=[bg,txt,sub];saveHistory();render();renderProps();renderLayers();renderCanvasSettings();fitToScreen();
-// ✅ Amélioration 1 : Initialiser l'indicateur
-updateCanvasSizeIndicator();}
+function init(){canvasBg='#0d0d0f';const bg=makeRect(130,130,240,240);bg.rx=14;bg.fill='#5b6af0';const txt=makeText(250,195,'RC');txt.fontSize=90;txt.size=90;txt.weight='900';txt.fill='#ffffff';const sub=makeText(250,295,'LOGO MAKER');sub.fontSize=15;sub.size=15;sub.weight='600';sub.fill='rgba(255,255,255,0.7)';sub.letterSpacing=3;elements=[bg,txt,sub];saveHistory();render();renderProps();renderLayers();renderCanvasSettings();fitToScreen();updateCanvasSizeIndicator();}
 init();
 if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
 </script>
